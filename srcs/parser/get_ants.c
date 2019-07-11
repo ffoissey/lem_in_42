@@ -1,19 +1,10 @@
 #include "lemin.h"
 
-static uint8_t	is_correct_ants_format(char *line)
-{
-	if (line == NULL || *line == '\0')
-		return (FALSE);
-	else if (ft_str_is_numeric(line) == FALSE)
-		return (FALSE);
-	return (TRUE);
-}
-
 int8_t			get_ants(t_lemin *lemin, char *line)
 {
 	if (is_comment(lemin, line) & COMMENT)
 		return (SUCCESS);
-	if (is_correct_ants_format(line) == FALSE)
+	if (is_correct_numeric_format(line) == FALSE)
 	{
 		lemin->error = ANTS_ERR | BAD_FORMAT;
 		return (FAILURE);

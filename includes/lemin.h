@@ -17,6 +17,10 @@
 # include <stdint.h>
 # include <limits.h>
 
+/*
+***** Comments and Commands
+*/
+
 # define NO_COMMENT			0x00
 # define COMMENT			0x01
 # define START_CMD			0x10
@@ -24,44 +28,55 @@
 # define UNKNOW_CMD			0x40
 
 /*
+*****************
+***** ERROR *****
+*****************
+*/
+
+/*
 **** Generic error
 */
 
-# define	NO_ERR			0x00000000
-# define	BAD_FORMAT		0x00000001
+# define NO_ERR				0x00000000
+# define BAD_FORMAT			0x00000001
 
 /*
 **** Ants error
 */
 
-# define	NO_ANT			0x00000010
-# define	TOO_MANY_ANTS	0x00000020
+# define NO_ANT				0x00000010
+# define TOO_MANY_ANTS		0x00000020
 
+/*
+**** Rooms error
+*/
+
+# define INVALID_COORD		0x00000040
+# define BAD_START_LETTER	0x00000080
+# define MISS_ROOMS			0x00000100
 /*
 **** Type of errors
 */
 
-# define	ANTS_ERR		0x00010000
-# define	ROOMS_ERR		0x00020000
-# define	LINKS_ERR		0x00040000
-# define	PRE_PROCESS_ERR	0x00080000
-# define	PROCESS_ERR		0x00100000
+# define ANTS_ERR			0x00010000
+# define ROOMS_ERR			0x00020000
+# define LINKS_ERR			0x00040000
+# define PRE_PROCESS_ERR	0x00100000
+# define PROCESS_ERR		0x00200000
 
 /*
 **** Critical errors
 */
 
-# define	READ_ERR		0x10000000
-# define	MALLOC_ERR		0x20000000
-# define	WRITE_ERR		0x40000000
+# define READ_ERR			0x10000000
+# define MALLOC_ERR			0x20000000
+# define WRITE_ERR			0x40000000
 
 enum				e_state
 {
 	GET_ANTS,
 	GET_ROOMS,
-	GET_LINKS,
-	PRINT,
-	ERROR
+	GET_LINKS
 };
 
 typedef struct		s_coord
@@ -73,6 +88,7 @@ typedef struct		s_coord
 typedef struct		s_room
 {
 	t_list			*ways;
+	char			*name;
 	t_coord			coord;
 	size_t			nb_ways;
 	size_t			distance_to_end;
@@ -85,6 +101,7 @@ typedef struct		s_lemin
 {
 	t_list			*start_room;
 	t_list			*end_room;
+	t_list			*list_room;
 	size_t			total_ants;
 	size_t			turn;
 	uint32_t		error;
@@ -114,6 +131,7 @@ int8_t		get_links(t_lemin *lemin, char *line);
 */
 
 uint8_t		is_comment(t_lemin *lemin, char *line);
+uint8_t		is_correct_numeric_format(char *line);
 
 /*
 **** Error Management

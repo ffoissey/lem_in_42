@@ -27,6 +27,30 @@ static void		ants_error(uint32_t error)
 
 }
 
+static void		rooms_error(uint32_t error)
+{
+	ft_putstr_fd("room: ", 2);
+	if (error & BAD_START_LETTER)
+		ft_putendl_fd("The name of a room can't start with the 'L' letter", 2);
+	else if (error & INVALID_COORD)
+		ft_putendl_fd("Invalid coordinate", 2);
+	else if (error & MISS_ROOMS)
+		ft_putendl_fd("At least two rooms are required", 2);
+	else if (error & BAD_FORMAT)
+		ft_putendl_fd("Bad format", 2);
+	else
+		ft_putendl_fd("Undefined error", 2);
+
+}
+
+static void		links_error(uint32_t error)
+{
+	ft_putstr_fd("links: ", 2);
+	if (error & BAD_FORMAT)
+		ft_putendl_fd("Bad format", 2);
+
+}
+
 void			print_error(uint32_t error)
 {
 	ft_putstr_fd("Error: ", 2);
@@ -38,4 +62,8 @@ void			print_error(uint32_t error)
 		perror("write");
 	else if (error & ANTS_ERR)
 		ants_error(error);
+	else if (error & ROOMS_ERR)
+		rooms_error(error);
+	else if (error & LINKS_ERR)
+		links_error(error);
 }
