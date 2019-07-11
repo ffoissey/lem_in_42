@@ -2,8 +2,7 @@
 
 int8_t		get_rooms(t_lemin *lemin, char *line)
 {
-	(void)lemin;
-	if (is_comment(line) & COMMENT)
+	if (is_comment(lemin, line) & COMMENT)
 		return (SUCCESS);
 	return (FAILURE);
 }

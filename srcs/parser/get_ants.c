@@ -11,7 +11,7 @@ static uint8_t	is_correct_ants_format(char *line)
 
 int8_t			get_ants(t_lemin *lemin, char *line)
 {
-	if (is_comment(line) & COMMENT)
+	if (is_comment(lemin, line) & COMMENT)
 		return (SUCCESS);
 	if (is_correct_ants_format(line) == FALSE)
 	{

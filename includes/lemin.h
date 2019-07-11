@@ -113,13 +113,13 @@ int8_t		get_links(t_lemin *lemin, char *line);
 **** Parser Tools
 */
 
-uint8_t		is_comment(char *line);
+uint8_t		is_comment(t_lemin *lemin, char *line);
 
 /*
 **** Error Management
 */
 
-uint8_t	is_major_error(uint32_t error);
-void	print_error(uint32_t error);
+uint8_t		is_major_error(uint32_t error);
+void		print_error(uint32_t error);
 
 #endif
