@@ -1,0 +1,28 @@
+#include "lemin.h"
+
+uint8_t			is_comment(t_lemin *lemin, char *line)
+{
+	uint8_t	comment;
+	if (line != NULL && *line != '#') 
+		return (NO_COMMENT);
+	if (ft_strnequ(line, "##", 2) == FALSE)
+		comment = COMMENT;
+	else if (ft_strequ(line, "##start") == TRUE)
+		comment = START_CMD;
+	else if (ft_strequ(line, "##end") == TRUE)
+		comment = END_CMD;
+	else
+		comment = UNKNOW_CMD | COMMENT;
+	if (ft_putendl(line + (comment == COMMENT ? 1 : 2)) == FAILURE)
+		lemin->error = WRITE_ERR;
+	return (comment);
+}
+
+uint8_t			is_correct_numeric_format(char *line)
+{
+	if (line == NULL || *line == '\0')
+		return (FALSE);
+	else if (ft_str_is_numeric(line) == FALSE)
+		return (FALSE);
+	return (TRUE);
+}
