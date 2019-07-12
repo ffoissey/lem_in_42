@@ -2,7 +2,7 @@
 
 static uint8_t is_valid_cmd(uint8_t comment, uint8_t cmd)
 {
-	if (cmd != FALSE && (comment == START_CMD || comment == END_CMD))
+	if (cmd == FALSE && (comment == START_CMD || comment == END_CMD))
 		return (comment);
 	return (FALSE);
 }
@@ -57,12 +57,12 @@ static	int8_t	room_acquisition(t_lemin *lemin, char *line, t_room *room)
 	line = ft_strchr(line, ' ');
 	room->coord.x = get_room_coord(lemin, &line);
 	room->coord.y = get_room_coord(lemin, &line);
-	/// if two same coord: error
-	if (line == NULL || *line == '\0')
+	if (lemin->error || line == NULL || *line != '\0')
 	{
 		ft_strdel(&room->name);
 		return (FAILURE);
 	}
+	/// if two same coord: error
 	return (SUCCESS);
 }
 
@@ -85,6 +85,7 @@ int8_t		get_rooms(t_lemin *lemin, char *line)
 	}
 	else if (room_acquisition(lemin, line, &room) == FAILURE)
 		return (FAILURE);
+
 	/// Add room to list or hashmap
 				
 	/// if cmd == start or cmd == end, update head pointer
