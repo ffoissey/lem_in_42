@@ -53,7 +53,10 @@ static void		links_error(uint32_t error)
 	ft_putstr_fd("links: ", 2);
 	if (error & BAD_FORMAT)
 		ft_putendl_fd("Bad format", 2);
-
+	else if (error & UNKNOW_ROOM)
+		ft_putendl_fd("Unknow room", 2);
+	else
+		ft_putendl_fd("Undefined error", 2);
 }
 
 void			print_error(uint32_t error)

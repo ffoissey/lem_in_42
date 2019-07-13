@@ -2,7 +2,9 @@
 
 static uint8_t is_valid_cmd(uint8_t comment, uint8_t cmd)
 {
-	if (cmd == FALSE && (comment == START_CMD || comment == END_CMD))
+	if (cmd != FALSE)
+		return (cmd);
+	else if (comment == START_CMD || comment == END_CMD)
 		return (comment);
 	return (FALSE);
 }
@@ -52,7 +54,7 @@ static	size_t	get_room_coord(t_lemin *lemin, char **line)
 static	int8_t	room_acquisition(t_lemin *lemin, char *line, t_room *room)
 {
 	room->links = NULL;
-	room->nb_ways = 0;
+	room->nb_links = 0;
 	room->mark = UNMARK; 
 	room->name = get_room_name(lemin, line);
 	if (lemin->error)
@@ -85,6 +87,7 @@ int8_t		get_rooms(t_lemin *lemin, char *line)
 			lemin->error = ROOMS_ERR | TOO_FEW;
 			return (FAILURE);
 		}
+		lemin->start_room->ants = lemin->total_ants;
 		lemin->state = GET_LINKS;
 		return (get_links(lemin, line));
 	}

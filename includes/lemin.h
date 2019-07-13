@@ -66,6 +66,8 @@
 # define START_ROOM			0x00000800
 # define END_ROOM			0x00001000
 # define TOO_FEW			0x00002000
+# define UNKNOW_ROOM		0x00004000
+
 /*
 **** Type of errors
 */
@@ -101,7 +103,7 @@ typedef struct		s_room
 {
 	t_list			*links;
 	char			*name;
-	size_t			nb_ways;
+	size_t			nb_links;
 	size_t			ants;
 	t_coord			coord;
 	uint8_t			mark;
@@ -113,8 +115,8 @@ typedef struct		s_lemin
 	t_room			*start_room;
 	t_room			*end_room;
 	size_t			total_ants;
-	uint32_t		error;
 	enum e_state	state;
+	uint32_t		error;
 }					t_lemin;			
 
 typedef int8_t	(*t_parsing)(t_lemin *, char *);
