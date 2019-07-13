@@ -23,15 +23,19 @@ static void	print_room_list(t_list *run)
 	while (run != NULL)
 	{
 		room = (t_room *)run->content;
-		ft_printf("\033[31m%s\033[0m\n", room->name);
-		ft_printf("|--> linked to: ");
+		ft_printf("\033[31m\n%s\033[0m\n", room->name);
+		ft_printf("|-----> ");
 		print_room_links(room->links);
 		run = run->next;
 	}
-	ft_printf("-------------------------\n");
 }
 
 void	print_graph(t_lemin *lemin)
 {
+	ft_printf("\033[33m\n####### DEBUG MODE ######\033[0m\n\n");
+	ft_printf("------ START | END ------\n\n");
+	ft_printf("Start: \033[36m%s\033[0m | End: \033[36m%s\033[0m\n\n",
+				lemin->start_room->name, lemin->end_room->name);
 	print_room_list(lemin->main_list_room);
+	ft_printf("\033[33m\n#########################\033[0m\n");
 }
