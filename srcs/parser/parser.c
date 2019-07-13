@@ -30,12 +30,9 @@ int8_t		parser(t_lemin *lemin)
 			break ;
 		ft_strdel(&line);
 	}
-	if  (lemin->main_list_room == NULL && lemin->error == NO_ERR)
+	ft_strdel(&line);
+	get_next_line(CLEANUP, NULL);
+	if (lemin->main_list_room == NULL && lemin->error == NO_ERR)
 		lemin->error = FILE_ERR; 
-	if (lemin->error) //is_major_error(lemin->error) == TRUE)
-	{
-		print_error(lemin->error);
-		// FREE ROUTINE
-	}
 	return (lemin->error == NO_ERR ? SUCCESS : FAILURE);
 }

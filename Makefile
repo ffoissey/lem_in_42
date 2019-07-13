@@ -124,6 +124,8 @@ PATH_SRCS += srcs/parser
 ################################################################################
 
 SRCS += lemin.c
+SRCS += error.c
+SRCS += exit_routine.c
 
 # Parser
 SRCS += parser.c
@@ -132,7 +134,6 @@ SRCS += get_rooms.c
 SRCS += create_room_node.c
 SRCS += get_links.c
 SRCS += parser_tools.c
-SRCS += error.c
 
 #Debug
 SRCS += debug.c

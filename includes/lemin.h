@@ -136,6 +136,25 @@ typedef int8_t	(*t_parsing)(t_lemin *, char *);
 
 /*
 **********************
+**** --- MAIN --- ****
+**********************
+*/
+
+/*
+**** Exit / Free
+*/
+
+void	exit_routine(t_lemin *lemin);
+
+/*
+**** Error Management
+*/
+
+uint8_t		is_major_error(uint32_t error);
+void		print_error(uint32_t error);
+
+/*
+**********************
 ******* PARSER *******
 **********************
 */
@@ -157,12 +176,6 @@ int8_t		get_links(t_lemin *lemin, char *line);
 uint8_t		is_comment(t_lemin *lemin, char *line);
 uint8_t		is_correct_numeric_format(char *line);
 
-/*
-**** Error Management
-*/
-
-uint8_t		is_major_error(uint32_t error);
-void		print_error(uint32_t error);
 
 /*
 **** Graph Tools

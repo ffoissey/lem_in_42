@@ -28,16 +28,19 @@ int					main(void)
 
 	ft_bzero(&lemin, sizeof(lemin));
 	if (parser(&lemin) == FAILURE)
+	{
+		print_error(lemin.error);
+		exit_routine(&lemin);
 		return (EXIT_FAILURE);
+	}
 	print_graph(&lemin); /// DEBUG
-	//else if (pre_process(&lemin) == FAILURE)
-	//	return (EXIT_FAILURE);
 	result = NULL;
 	while (is_completed(&lemin) == FALSE)
 	{
-	//	result = process(lemin->start_room, lemin->turn);
+		//result = process(lemin->start_room, lemin->turn);
 		ft_putendl(result);
 		ft_strdel(&result);
 	}
+	exit_routine(&lemin);
 	return (EXIT_SUCCESS);
 }
