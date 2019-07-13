@@ -99,6 +99,18 @@ typedef struct		s_coord
 	size_t			y;
 }					t_coord;
 
+typedef struct		s_way
+{
+	t_list			*list;
+	size_t			size;
+}					t_way;
+
+typedef struct		s_ant
+{
+	t_list			*position;
+	size_t			id;
+}					t_ant;
+
 typedef struct		s_room
 {
 	t_list			*links;
