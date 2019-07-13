@@ -62,6 +62,8 @@ static	int8_t	room_acquisition(t_lemin *lemin, char *line, t_room *room)
 	room->coord.y = get_room_coord(lemin, &line);
 	if (lemin->error || line == NULL || *line != '\0')
 	{
+		if (lemin->error == NO_ERR)
+			lemin->error = ROOMS_ERR | BAD_FORMAT;
 		ft_strdel(&room->name);
 		return (FAILURE);
 	}

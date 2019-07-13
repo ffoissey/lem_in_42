@@ -7,11 +7,8 @@ static t_room	*get_room_adress(t_list *run, char *room_name)
 	while (run != NULL)
 	{
 		cur_room = (t_room *)run->content;
-		if (cur_room != NULL)
-		{
-			if (ft_strequ(room_name, cur_room->name) == TRUE)
-				return (cur_room);
-		}
+		if (ft_strequ(room_name, cur_room->name) == TRUE)
+			return (cur_room);
 		run = run->next;
 	}
 	return (NULL);
