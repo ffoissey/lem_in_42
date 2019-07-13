@@ -27,14 +27,15 @@ int8_t		parser(t_lemin *lemin)
 		else if (ret == FAILURE)
 			lemin->error = READ_ERR; 
 		else
-			return (SUCCESS);
+			break ;
 		ft_strdel(&line);
 	}
+	if  (lemin->main_list_room == NULL && lemin->error == NO_ERR)
+		lemin->error = FILE_ERR; 
 	if (lemin->error) //is_major_error(lemin->error) == TRUE)
 	{
 		print_error(lemin->error);
 		// FREE ROUTINE
-		return (FAILURE);
 	}
-	return (SUCCESS);
+	return (lemin->error == NO_ERR ? SUCCESS : FAILURE);
 }

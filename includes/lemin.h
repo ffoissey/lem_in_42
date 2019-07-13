@@ -85,6 +85,7 @@
 # define READ_ERR			0x10000000
 # define MALLOC_ERR			0x20000000
 # define WRITE_ERR			0x40000000
+# define FILE_ERR			0x80000000
 
 enum				e_state
 {

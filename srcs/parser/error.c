@@ -74,4 +74,6 @@ void			print_error(uint32_t error)
 		rooms_error(error);
 	else if (error & LINKS_ERR)
 		links_error(error);
+	else if (error & FILE_ERR)
+		ft_putendl_fd("File is empty", 2);
 }
