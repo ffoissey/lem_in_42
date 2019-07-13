@@ -29,6 +29,7 @@ int					main(void)
 	ft_bzero(&lemin, sizeof(lemin));
 	if (parser(&lemin) == FAILURE)
 		return (EXIT_FAILURE);
+	print_graph(&lemin); /// DEBUG
 	//else if (pre_process(&lemin) == FAILURE)
 	//	return (EXIT_FAILURE);
 	result = NULL;

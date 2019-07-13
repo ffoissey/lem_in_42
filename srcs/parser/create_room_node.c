@@ -58,10 +58,6 @@ int8_t		create_room_node(t_lemin *lemin, t_room *room, uint8_t cmd)
 {
 	t_list	*new_node;
 
-	if (cmd == END_CMD)
-		ft_printf("END\n");
-	if (cmd == START_CMD)
-		ft_printf("START\n");
 	if (room_control(lemin, room) == FAILURE)
 		return (FAILURE);
 	new_node = ft_lstnew(room, sizeof(t_room));

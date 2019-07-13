@@ -157,4 +157,10 @@ void		print_error(uint32_t error);
 
 int8_t		create_room_node(t_lemin *lemin, t_room *room, uint8_t cmd);
 
+/*
+**** Debug
+*/
+
+void	print_graph(t_lemin *lemin);
+
 #endif

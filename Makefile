@@ -134,6 +134,9 @@ SRCS += get_links.c
 SRCS += parser_tools.c
 SRCS += error.c
 
+#Debug
+SRCS += debug.c
+
 ################# ATTRIBUTION
 
 vpath %.c $(PATH_SRCS)

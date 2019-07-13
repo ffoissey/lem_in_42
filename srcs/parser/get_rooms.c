@@ -1,10 +1,8 @@
 #include "lemin.h"
 
-static uint8_t is_valid_cmd(uint8_t comment, uint8_t cmd)
+static uint8_t is_valid_cmd(uint8_t comment)
 {
-	if (cmd != FALSE)
-		return (cmd);
-	else if (comment == START_CMD || comment == END_CMD)
+	if (comment == START_CMD || comment == END_CMD)
 		return (comment);
 	return (FALSE);
 }
@@ -78,7 +76,7 @@ int8_t		get_rooms(t_lemin *lemin, char *line)
 
 	if ((comment = is_comment(lemin, line)) & COMMENT)
 		return (SUCCESS);
-	if ((cmd = is_valid_cmd(comment, cmd)))
+	if (cmd == FALSE && (cmd = is_valid_cmd(comment)))
 		return (SUCCESS);
 	if (cmd == FALSE && ft_strchr(line, ' ') == NULL)
 	{
