@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parser.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ffoissey <ffoisssey@student.42.fr>         +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/07/12 11:08:43 by ffoissey          #+#    #+#             */
+/*   Updated: 2019/07/12 11:58:54 by ffoissey         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "lemin.h"
 
 int8_t		parser(t_lemin *lemin)
@@ -7,11 +19,12 @@ int8_t		parser(t_lemin *lemin)
 	int					ret;
 
 	line = NULL;
+	lemin->state = GET_ANTS;
 	while (lemin->error == NO_ERR)
 	{
 		if ((ret = get_next_line(STDIN_FILENO, &line)) > 0)
 			parsing[lemin->state](lemin, line);
-		else if (ret == -1)
+		else if (ret == FAILURE)
 			lemin->error = READ_ERR; 
 		else
 			return (SUCCESS);
