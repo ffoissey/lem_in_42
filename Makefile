@@ -127,6 +127,7 @@ SRCS += lemin.c
 SRCS += error.c
 SRCS += exit_routine.c
 SRCS += ways_selection.c
+SRCS += tools.c
 
 # Parser
 SRCS += parser.c

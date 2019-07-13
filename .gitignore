@@ -54,5 +54,5 @@ dkms.conf
 # Swap Files
 .*.sw*
 lem-in
-lem-indb
+lem-in_db
 objs

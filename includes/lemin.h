@@ -127,7 +127,10 @@ typedef struct		s_lemin
 	t_list			*main_list_room;
 	t_room			*start_room;
 	t_room			*end_room;
+	t_list			*possible_way_list;
 	t_list			*way_list;
+	size_t			nb_ways;
+	size_t			nb_max_ways;
 	size_t			total_ants;
 	enum e_state	state;
 	uint32_t		error;
@@ -155,6 +158,12 @@ void	exit_routine(t_lemin *lemin);
 
 uint8_t		is_major_error(uint32_t error);
 void		print_error(uint32_t error);
+
+/*
+**** Tools
+*/
+
+int8_t		mark_way(t_list *lst, uint8_t mark);
 
 /*
 **********************
