@@ -58,7 +58,8 @@ int8_t		get_links(t_lemin *lemin, char *line)
 
 	if (is_comment(lemin, line) & COMMENT)
 		return (SUCCESS);
-	if (line == NULL || line == '\0' || (hyphen = ft_strchr(line, '-')) == NULL)
+	if (line == NULL || *line == '\0'
+			|| (hyphen = ft_strchr(line, '-')) == NULL)
 	{
 		lemin->error = LINKS_ERR | BAD_FORMAT;
 		return (FAILURE);
