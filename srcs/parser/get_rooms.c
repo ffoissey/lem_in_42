@@ -51,6 +51,9 @@ static	size_t	get_room_coord(t_lemin *lemin, char **line)
 
 static	int8_t	room_acquisition(t_lemin *lemin, char *line, t_room *room)
 {
+	room->links = NULL;
+	room->nb_ways = 0;
+	room->mark = UNMARK; 
 	room->name = get_room_name(lemin, line);
 	if (lemin->error)
 		return (FAILURE);
@@ -62,7 +65,6 @@ static	int8_t	room_acquisition(t_lemin *lemin, char *line, t_room *room)
 		ft_strdel(&room->name);
 		return (FAILURE);
 	}
-	/// if two same coord: error
 	return (SUCCESS);
 }
 
@@ -78,18 +80,18 @@ int8_t		get_rooms(t_lemin *lemin, char *line)
 		return (SUCCESS);
 	if (cmd == FALSE && ft_strchr(line, ' ') == NULL)
 	{
-		// if size_list < 2
-		// 		lemin->error = ROOM_ERR | MISS_ROOMS
+		if (lemin->start_room == NULL || lemin->end_room == NULL)
+		{
+			lemin->error = ROOMS_ERR | TOO_FEW;
+			return (FAILURE);
+		}
 		lemin->state = GET_LINKS;
 		return (get_links(lemin, line));
 	}
 	else if (room_acquisition(lemin, line, &room) == FAILURE)
 		return (FAILURE);
-
-	/// Add room to list or hashmap
-				
-	/// if cmd == start or cmd == end, update head pointer
-	//  WARNING: if head pointer already exist: get error
+	else if (create_room_node(lemin, &room, cmd) == FAILURE)
+		return (FAILURE);
 	cmd = FALSE;
 	return (SUCCESS);
 }

@@ -36,11 +36,16 @@ static void		rooms_error(uint32_t error)
 		ft_putendl_fd("Invalid coordinate", 2);
 	else if (error & MISS_ROOMS)
 		ft_putendl_fd("At least two rooms are required", 2);
+	else if (error & SAME_NAME)
+		ft_putendl_fd("Two rooms have the same name", 2);
+	else if (error & SAME_COORD)
+		ft_putendl_fd("Two rooms have the same coordinates", 2);
+	else if (error & TOO_FEW)
+		ft_putendl_fd("Start or end is not defined", 2);
 	else if (error & BAD_FORMAT)
 		ft_putendl_fd("Bad format", 2);
 	else
 		ft_putendl_fd("Undefined error", 2);
-
 }
 
 static void		links_error(uint32_t error)

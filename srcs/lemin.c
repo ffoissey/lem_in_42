@@ -14,14 +14,9 @@
 
 static uint8_t		is_completed(t_lemin *lemin)
 {
-	t_room *end_room;
-
 	if (lemin->end_room == NULL)
-		return (TRUE);
-	end_room = (t_room *)lemin->end_room->content;
-	if (end_room == NULL)
-		return (TRUE);
-	else if (end_room->ants == lemin->total_ants)
+		return (FALSE);
+	if (lemin->end_room->ants == lemin->total_ants)
 		return (TRUE);
 	return (FALSE);
 }
@@ -42,7 +37,6 @@ int					main(void)
 	//	result = process(lemin->start_room, lemin->turn);
 		ft_putendl(result);
 		ft_strdel(&result);
-		lemin.turn++;
 	}
 	return (EXIT_SUCCESS);
 }

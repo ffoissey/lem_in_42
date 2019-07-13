@@ -4,7 +4,7 @@ uint8_t			is_comment(t_lemin *lemin, char *line)
 {
 	uint8_t	comment;
 
-	if (line == NULL && *line != '#') 
+	if (line == NULL || *line != '#') 
 		return (NO_COMMENT);
 	if (ft_strnequ(line, "##", 2) == FALSE)
 		comment = COMMENT;

@@ -127,11 +127,12 @@ SRCS += lemin.c
 
 # Parser
 SRCS += parser.c
-SRCS += error.c
 SRCS += get_ants.c
 SRCS += get_rooms.c
+SRCS += create_room_node.c
 SRCS += get_links.c
 SRCS += parser_tools.c
+SRCS += error.c
 
 ################# ATTRIBUTION
 

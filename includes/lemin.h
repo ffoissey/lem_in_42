@@ -28,6 +28,13 @@
 # define UNKNOW_CMD			0x40
 
 /*
+**** Node Mark
+*/
+
+# define UNMARK				0
+# define MARK				1
+
+/*
 *****************
 ***** ERROR *****
 *****************
@@ -54,6 +61,11 @@
 # define INVALID_COORD		0x00000040
 # define BAD_START_LETTER	0x00000080
 # define MISS_ROOMS			0x00000100
+# define SAME_NAME			0x00000200
+# define SAME_COORD			0x00000400
+# define START_ROOM			0x00000800
+# define END_ROOM			0x00001000
+# define TOO_FEW			0x00002000
 /*
 **** Type of errors
 */
@@ -87,23 +99,20 @@ typedef struct		s_coord
 
 typedef struct		s_room
 {
-	t_list			*ways;
+	t_list			*links;
 	char			*name;
-	t_coord			coord;
 	size_t			nb_ways;
-	size_t			distance_to_end;
 	size_t			ants;
-	size_t			waiting;
-	uint8_t			is_free;
+	t_coord			coord;
+	uint8_t			mark;
 }					t_room;
 
 typedef struct		s_lemin
 {
-	t_list			*start_room;
-	t_list			*end_room;
-	t_list			*list_room;
+	t_list			*main_list_room;
+	t_room			*start_room;
+	t_room			*end_room;
 	size_t			total_ants;
-	size_t			turn;
 	uint32_t		error;
 	enum e_state	state;
 }					t_lemin;			
@@ -139,5 +148,11 @@ uint8_t		is_correct_numeric_format(char *line);
 
 uint8_t		is_major_error(uint32_t error);
 void		print_error(uint32_t error);
+
+/*
+**** Graph Tools
+*/
+
+int8_t		create_room_node(t_lemin *lemin, t_room *room, uint8_t cmd);
 
 #endif
