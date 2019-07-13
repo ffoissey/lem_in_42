@@ -34,6 +34,7 @@ int					main(void)
 		return (EXIT_FAILURE);
 	}
 	print_graph(&lemin); /// DEBUG
+	ways_selection(&lemin); // WAYS SELECTION
 	result = NULL;
 	while (is_completed(&lemin) == FALSE)
 	{

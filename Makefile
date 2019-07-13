@@ -126,6 +126,7 @@ PATH_SRCS += srcs/parser
 SRCS += lemin.c
 SRCS += error.c
 SRCS += exit_routine.c
+SRCS += ways_selection.c
 
 # Parser
 SRCS += parser.c
