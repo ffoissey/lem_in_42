@@ -115,6 +115,7 @@ typedef struct		s_ant
 typedef struct		s_room
 {
 	t_list			*links;
+	struct	s_room	*current_link;
 	char			*name;
 	size_t			nb_links;
 	size_t			ants;
@@ -144,6 +145,7 @@ typedef int8_t	(*t_parsing)(t_lemin *, char *);
 **********************
 */
 
+int		graph_course(t_room *room, t_lemin *lemin);
 void	ways_selection(t_lemin *lemin);
 
 /*
@@ -200,5 +202,6 @@ int8_t		create_room_node(t_lemin *lemin, t_room *room, uint8_t cmd);
 */
 
 void	print_graph(t_lemin *lemin);
+void	print_way(t_way *way);
 
 #endif

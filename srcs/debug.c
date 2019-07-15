@@ -39,3 +39,18 @@ void	print_graph(t_lemin *lemin)
 	print_room_list(lemin->main_list_room);
 	ft_printf("\033[33m\n#########################\033[0m\n");
 }
+
+void	print_way(t_way *way)
+{
+	t_list	*list;
+
+	list = way->list;
+	while (list != NULL)
+	{
+		ft_printf("%s", ((t_room*)list->content)->name);
+		if (list->next != NULL)
+			ft_printf("-->");
+		list = list->next;
+	}
+	ft_printf("\n");
+}

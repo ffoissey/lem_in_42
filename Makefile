@@ -116,6 +116,7 @@ HEADER += lemin.h
 
 PATH_SRCS += srcs
 PATH_SRCS += srcs/parser
+PATH_SRCS += srcs/graph_building
 
 ################################################################################
 #################################               ################################
@@ -127,6 +128,7 @@ SRCS += lemin.c
 SRCS += error.c
 SRCS += exit_routine.c
 SRCS += ways_selection.c
+SRCS += graph_course.c
 SRCS += tools.c
 
 # Parser
