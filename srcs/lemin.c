@@ -6,7 +6,7 @@
 /*   By: ffoissey <ffoisssey@student.42.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/10 17:50:47 by ffoissey          #+#    #+#             */
-/*   Updated: 2019/07/10 19:01:09 by ffoissey         ###   ########.fr       */
+/*   Updated: 2019/07/16 15:11:29 by ffoissey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ int					main(void)
 		exit_routine(&lemin);
 		return (EXIT_FAILURE);
 	}
+	set_distance_to_start(lemin.start_room, &lemin, 0);
 	print_graph(&lemin); /// DEBUG
 	//return (EXIT_SUCCESS);
 	ft_printf("starting graph_course...\n");

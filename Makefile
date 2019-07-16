@@ -6,7 +6,7 @@
 #    By: ffoissey <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/05 18:25:23 by ffoissey          #+#    #+#              #
-#    Updated: 2019/07/10 17:48:56 by ffoissey         ###   ########.fr        #
+#    Updated: 2019/07/16 14:50:32 by ffoissey         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -129,6 +129,7 @@ SRCS += error.c
 SRCS += exit_routine.c
 SRCS += ways_selection.c
 SRCS += graph_course.c
+SRCS += distance_to_start.c
 SRCS += tools.c
 
 # Parser

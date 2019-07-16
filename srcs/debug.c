@@ -15,7 +15,7 @@ static void	print_room_links(t_list *run)
 	ft_putchar('\n');
 }
 
-static void	print_room_list(t_list *run)
+static void	print_room_list(t_list *run, t_lemin *lemin)
 {
 	t_room *room;
 
@@ -24,6 +24,14 @@ static void	print_room_list(t_list *run)
 	{
 		room = (t_room *)run->content;
 		ft_printf("\033[31m\n%s\033[0m\n", room->name);
+		ft_printf("\033[35mdistance to start: %d\033[0m\n",
+					(int)room->d_to_start);
+		ft_printf("\033[35mstate: %s\033[0m\n",
+					room->mark == DEAD ? "DEAD" : "OK");
+		if (room == lemin->start_room)
+			ft_printf("START\n");
+		else if (room == lemin->end_room)
+			ft_printf("END\n");
 		ft_printf("|-----> ");
 		print_room_links(room->links);
 		run = run->next;
@@ -36,7 +44,8 @@ void	print_graph(t_lemin *lemin)
 	ft_printf("------ START | END ------\n\n");
 	ft_printf("Start: \033[36m%s\033[0m | End: \033[36m%s\033[0m\n\n",
 				lemin->start_room->name, lemin->end_room->name);
-	print_room_list(lemin->main_list_room);
+	print_room_list(lemin->main_list_room, lemin);
+	ft_printf("Total ants: \033[36m%d\033[0m\n", (int)lemin->total_ants);
 	ft_printf("\033[33m\n#########################\033[0m\n");
 }
 

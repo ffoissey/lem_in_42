@@ -1,15 +1,16 @@
-#include "lemin.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   graph_course.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ffoissey <ffoisssey@student.42.fr>         +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/07/16 14:39:51 by ffoissey          #+#    #+#             */
+/*   Updated: 2019/07/16 15:29:19 by ffoissey         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-// static	t_room	*find_mark_room(t_list *links)
-// {
-// 	while (links)
-// 	{
-// 		if (((t_room*)links->content)->mark == MARK)
-// 			return ((t_room*)(links->content));
-// 		links = links->next;
-// 	}
-// 	return (NULL);
-// }
+#include "lemin.h"
 
 static	void	add_way(t_lemin *lemin, t_way *way)
 {
@@ -22,7 +23,7 @@ static	void	add_way(t_lemin *lemin, t_way *way)
 	print_way(way);
 }
 
-static	int		save_the_way(t_lemin *lemin)
+static	int8_t		save_the_way(t_lemin *lemin)
 {
 	t_room	*room;
 	t_list	*new;
@@ -46,9 +47,10 @@ static	int		save_the_way(t_lemin *lemin)
 	return (SUCCESS);
 }
 
-int				graph_course(t_room *room, t_lemin *lemin)
+int8_t				graph_course(t_room *room, t_lemin *lemin)
 {
 	t_list *links;
+	t_room *cur_room;
 
 	if (room == lemin->start_room)
 	{
@@ -56,17 +58,21 @@ int				graph_course(t_room *room, t_lemin *lemin)
 			return (FAILURE);
 		return (SUCCESS);
 	}
+	if (room->d_to_start > lemin->total_ants)
+		return (FAILURE);
 	room->mark = MARK;
 	links = room->links;
 	while (links != NULL)
 	{
-		if (((t_room*)links->content)->mark == UNMARK)
+		cur_room = (t_room *)links->content;
+		if (cur_room->mark == UNMARK)
 		{
-			room->current_link = ((t_room*)links->content);
-			graph_course((t_room*)(links->content), lemin);
+			room->current_link = cur_room;
+			graph_course(cur_room, lemin);
 		}
 		links = links->next;
 	}
 	room->mark = UNMARK;
+	room->current_link = NULL;
 	return (SUCCESS);	
 }
