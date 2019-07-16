@@ -47,12 +47,38 @@ int8_t		save_the_way(t_lemin *lemin)
 	return (SUCCESS);
 }
 
-int8_t				go_to_start(t_room *room, t_lemin *lemin)
+t_room			*get_end_best_room(t_room *room, size_t *i, t_lemin *lemin)
 {
 	t_list *links;
-	t_room *cur_room;
 	t_room	*best_room;
+	t_room	*cur_room;
 	size_t	d_from_start;
+
+	d_from_start = room->d_start;
+	best_room = NULL;
+	links = room->links;
+	while (links != NULL)
+	{
+		cur_room = (t_room *)links->content;
+		if (cur_room->mark != DEAD)
+		{
+			if (d_from_start > cur_room->d_start)
+			{
+				d_from_start = cur_room->d_start;
+				best_room = cur_room;
+			}
+			if (cur_room != lemin->start_room) // GOOD ?
+				(*i)++;
+		}
+		links = links->next;
+	}
+	return (best_room);
+}
+
+int8_t				go_to_start(t_room *room, t_lemin *lemin)
+{
+	t_room	*best_room;
+	size_t	i;
 
 	if (room == lemin->start_room)
 	{
@@ -60,57 +86,65 @@ int8_t				go_to_start(t_room *room, t_lemin *lemin)
 			return (FAILURE);
 		return (SUCCESS);
 	}
-	d_from_start = room->d_start;
-	links = room->links;
+	i = 0;
+	if ((best_room = get_end_best_room(room, &i, lemin)) != NULL)
+	{
+		room->current_link = best_room;
+		if (go_to_start(best_room, lemin) == SUCCESS)
+		{
+			if (i < 3 && room != lemin->end_room)
+				room->mark = DEAD;
+			return (SUCCESS);
+		}
+	}
+	return (FAILURE);
+}
+
+t_room			*get_start_best_room(t_room *room, size_t *i, t_lemin *lemin)
+{
+	t_list *links;
+	t_room	*best_room;
+	t_room	*cur_room;
+	size_t	d_from_end;
+
+	d_from_end = room->d_end;
 	best_room = NULL;
+	links = room->links;
 	while (links != NULL)
 	{
 		cur_room = (t_room *)links->content;
-		if (cur_room->mark != DEAD && d_from_start > cur_room->d_start)
+		if (cur_room->mark != DEAD)
 		{
-			d_from_start = cur_room->d_start;
-			best_room = cur_room;
+			if (d_from_end > cur_room->d_end)
+			{
+				d_from_end = cur_room->d_end;
+				best_room = cur_room;
+			}
+			if (cur_room != lemin->end_room) // GOOD?
+				(*i)++;
 		}
 		links = links->next;
 	}
-	if (best_room != NULL)
-	{
-		room->current_link = best_room;
-		go_to_start(best_room, lemin);
-		if (room->nb_links < 3)
-			room->mark = DEAD;
-	}
-	return (SUCCESS);
+	return (best_room);
 }
 
 int8_t			roll_back_to_end(t_room *room, t_lemin *lemin)
 {
-	t_room	*cur_room;
-	t_list *links;
 	t_room	*best_room;
-	size_t	d_from_end;
+	size_t	i;
 
 	if (room == lemin->end_room)
 		return (SUCCESS);
-	links = room->links;
-	best_room = NULL;
-	d_from_end = room->d_end;
-	while (links != NULL)
-	{
-		cur_room = (t_room *)links->content;
-		if (cur_room->mark != DEAD && d_from_end > cur_room->d_end)
-		{
-			d_from_end = cur_room->d_end;
-			best_room = cur_room;
-		}
-		links = links->next;
-	}
-	if (room->nb_links < 3)
-		room->mark = DEAD;
-	if (best_room != NULL)
+	i = 0;
+	if ((best_room = get_start_best_room(room, &i, lemin)) != NULL)
 	{
 		best_room->current_link = room;
-		return (roll_back_to_end(best_room, lemin));
+		if (roll_back_to_end(best_room, lemin) == SUCCESS)
+		{
+			if (i < 3 && room != lemin->start_room)
+				room->mark = DEAD;
+			return (SUCCESS);
+		}
 	}
 	return (FAILURE);
 }
@@ -124,7 +158,7 @@ int8_t				graph_course(t_lemin *lemin)
 	while (run != NULL)
 	{
 		cur_room = (t_room *)run->content;
-		if (cur_room->mark != DEAD)
+		if (cur_room->mark != DEAD && cur_room != lemin->end_room)
 		{
 			if (roll_back_to_end(cur_room, lemin) == SUCCESS)
 				go_to_start(cur_room, lemin);

@@ -24,6 +24,8 @@ static void	print_room_list(t_list *run, t_lemin *lemin)
 	{
 		room = (t_room *)run->content;
 		ft_printf("\033[31m\n%s\033[0m\n", room->name);
+		ft_printf("\033[35mnb links: %d\033[0m\n",
+					(int)room->nb_links);
 		ft_printf("\033[35mdistance from start: %d\033[0m\n",
 					(int)room->d_start);
 		ft_printf("\033[35mdistance from end: %d\033[0m\n",
