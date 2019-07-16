@@ -6,7 +6,7 @@
 /*   By: ffoissey <ffoisssey@student.42.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/16 14:39:51 by ffoissey          #+#    #+#             */
-/*   Updated: 2019/07/16 17:15:17 by ffoissey         ###   ########.fr       */
+/*   Updated: 2019/07/16 20:16:54 by ffoissey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static	void	add_way(t_lemin *lemin, t_way *way)
 	ft_lstadd_back(&(lemin->way_list), new);
 	lemin->nb_ways++;
 	//DEBUG
-	print_way(way);
+	//print_way(way);
 }
 
 int8_t		save_the_way(t_lemin *lemin)
@@ -47,17 +47,12 @@ int8_t		save_the_way(t_lemin *lemin)
 	return (SUCCESS);
 }
 
-static uint8_t		is_valid_distance(t_room *room, t_room *cur_room)
-{
-	if (cur_room->d_end <= room->d_end && cur_room->d_start >= room->d_start)
-		return (FALSE);
-	return (TRUE);
-}
-
-int8_t				graph_course(t_room *room, t_lemin *lemin)
+int8_t				go_to_start(t_room *room, t_lemin *lemin)
 {
 	t_list *links;
 	t_room *cur_room;
+	t_room	*best_room;
+	size_t	d_from_start;
 
 	if (room == lemin->start_room)
 	{
@@ -65,21 +60,96 @@ int8_t				graph_course(t_room *room, t_lemin *lemin)
 			return (FAILURE);
 		return (SUCCESS);
 	}
-	if (room->d_start > lemin->total_ants)
-		return (FAILURE);
-	room->mark = MARK;
+	links = room->links;
+	d_from_start = lemin->end_room->d_start;
+	best_room = NULL;
+	while (links != NULL)
+	{
+		cur_room = (t_room *)links->content;
+		if (d_from_start > cur_room->d_start)
+		{
+			d_from_start = cur_room->d_start;
+			best_room = cur_room;
+		}
+	}
+	if (best_room != NULL)
+	{
+		best_room->mark = MARK;
+		go_to_start(best_room, lemin);
+		best_room->mark = UNMARK;
+	}
+	return (SUCCESS);	
+}
+
+void				trace_til_mark(t_room *room, t_lemin *lemin)
+{
+	t_list *links;
+	t_room *cur_room;
+
 	links = room->links;
 	while (links != NULL)
 	{
 		cur_room = (t_room *)links->content;
-		if (cur_room->mark == UNMARK && is_valid_distance(room, cur_room) == TRUE)
+		if (cur_room->mark == MARK)
 		{
+			links = cur_room->links;
 			room->current_link = cur_room;
-			graph_course(cur_room, lemin);
+		}
+		else
+			links = links->next;
+	}
+	go_to_start(cur_room, lemin);
+}
+
+void				roll_back_to_end(t_room *room, t_lemin *lemin)
+{
+	t_room	*cur_room;
+	t_list *links;
+	t_room	*best_room;
+	size_t	d_from_end;
+
+	if (room == lemin->end_room)
+	{
+		trace_til_mark(room, lemin);
+		return ;
+	}
+	links = room->links;
+	best_room = NULL;
+	d_from_end = lemin->end_room->d_start;
+	while (links != NULL)
+	{
+		cur_room = (t_room *)links->content;
+		if (d_from_end > cur_room->d_end)
+		{
+			d_from_end = cur_room->d_end;
+			best_room = cur_room;
 		}
 		links = links->next;
 	}
-	room->mark = UNMARK;
-	room->current_link = NULL;
+	if (best_room != NULL)
+	{
+		best_room->mark = MARK;
+		roll_back_to_end(best_room, lemin);
+		best_room->mark = UNMARK;
+	}
+}
+
+int8_t				graph_course(t_lemin *lemin)
+{
+	t_list	*run;
+	t_room *cur_room;
+
+	run = lemin->main_list_room;
+	while (run != NULL)
+	{
+		cur_room = (t_room *)run->content;
+		if (cur_room != lemin->start_room && cur_room != lemin->end_room
+				&& cur_room->mark != DEAD)
+				//&& cur_room->d_start < lemin->total_ants)
+		{
+			roll_back_to_end(cur_room, lemin);
+		}
+		run = run->next;
+	}
 	return (SUCCESS);	
 }

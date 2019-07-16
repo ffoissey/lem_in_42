@@ -6,7 +6,7 @@
 /*   By: ffoissey <ffoisssey@student.42.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/10 17:50:47 by ffoissey          #+#    #+#             */
-/*   Updated: 2019/07/16 16:26:00 by ffoissey         ###   ########.fr       */
+/*   Updated: 2019/07/16 20:17:03 by ffoissey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ int					main(void)
 	print_graph(&lemin); /// DEBUG
 	//return (EXIT_SUCCESS);
 	ft_printf("starting graph_course...\n");
-	graph_course(lemin.end_room, &lemin);
+	graph_course(&lemin);
 	ft_printf("count: %zu\n", lemin.nb_ways);
 	return (EXIT_SUCCESS);
 	ways_selection(&lemin); // WAYS SELECTION
