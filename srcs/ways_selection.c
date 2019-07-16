@@ -12,13 +12,6 @@ int				sort_by_size(void *content1, void *content2)
 	return (way1->size < way2->size);
 }
 
-static size_t	get_nb_max_ways(t_lemin *lemin)
-{
-	if (lemin->start_room->nb_links > lemin->end_room->nb_links)
-		return (lemin->end_room->nb_links);
-	return (lemin->start_room->nb_links);
-}
-
 static size_t	try_to_match(t_lemin *lemin, t_list *way_list,
 					size_t count, size_t nb_ways)
 {

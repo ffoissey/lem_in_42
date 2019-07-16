@@ -21,3 +21,10 @@ int8_t		mark_way(t_list *lst, uint8_t mark)
 	}
 	return (SUCCESS);
 }
+
+size_t		get_nb_max_ways(t_lemin *lemin)
+{
+	if (lemin->start_room->nb_links > lemin->end_room->nb_links)
+		return (lemin->end_room->nb_links);
+	return (lemin->start_room->nb_links);
+}

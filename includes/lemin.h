@@ -6,7 +6,7 @@
 /*   By: ffoissey <ffoisssey@student.42.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/10 17:19:59 by ffoissey          #+#    #+#             */
-/*   Updated: 2019/07/16 14:49:56 by ffoissey         ###   ########.fr       */
+/*   Updated: 2019/07/16 16:26:16 by ffoissey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,7 +118,8 @@ typedef struct		s_room
 	t_list			*links;
 	struct	s_room	*current_link;
 	char			*name;
-	size_t			d_to_start;
+	size_t			d_start;
+	size_t			d_end;
 	size_t			nb_links;
 	size_t			ants;
 	t_coord			coord;
@@ -149,7 +150,8 @@ typedef int8_t	(*t_parsing)(t_lemin *, char *);
 
 int8_t	graph_course(t_room *room, t_lemin *lemin);
 void	ways_selection(t_lemin *lemin);
-int8_t	set_distance_to_start(t_room *room, t_lemin *lemin, size_t distance);
+int8_t	set_distance_from_start(t_room *room, t_lemin *lemin, size_t distance);
+int8_t	set_distance_from_end(t_room *room, t_lemin *lemin, size_t distance);
 
 /*
 **** Exit / Free
@@ -169,6 +171,7 @@ void		print_error(uint32_t error);
 */
 
 int8_t		mark_way(t_list *lst, uint8_t mark);
+size_t		get_nb_max_ways(t_lemin *lemin);
 
 /*
 **********************

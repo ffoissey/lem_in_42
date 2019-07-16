@@ -6,7 +6,7 @@
 /*   By: ffoissey <ffoisssey@student.42.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/16 14:39:51 by ffoissey          #+#    #+#             */
-/*   Updated: 2019/07/16 15:29:19 by ffoissey         ###   ########.fr       */
+/*   Updated: 2019/07/16 17:15:17 by ffoissey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static	void	add_way(t_lemin *lemin, t_way *way)
 	print_way(way);
 }
 
-static	int8_t		save_the_way(t_lemin *lemin)
+int8_t		save_the_way(t_lemin *lemin)
 {
 	t_room	*room;
 	t_list	*new;
@@ -47,6 +47,13 @@ static	int8_t		save_the_way(t_lemin *lemin)
 	return (SUCCESS);
 }
 
+static uint8_t		is_valid_distance(t_room *room, t_room *cur_room)
+{
+	if (cur_room->d_end <= room->d_end && cur_room->d_start >= room->d_start)
+		return (FALSE);
+	return (TRUE);
+}
+
 int8_t				graph_course(t_room *room, t_lemin *lemin)
 {
 	t_list *links;
@@ -58,14 +65,14 @@ int8_t				graph_course(t_room *room, t_lemin *lemin)
 			return (FAILURE);
 		return (SUCCESS);
 	}
-	if (room->d_to_start > lemin->total_ants)
+	if (room->d_start > lemin->total_ants)
 		return (FAILURE);
 	room->mark = MARK;
 	links = room->links;
 	while (links != NULL)
 	{
 		cur_room = (t_room *)links->content;
-		if (cur_room->mark == UNMARK)
+		if (cur_room->mark == UNMARK && is_valid_distance(room, cur_room) == TRUE)
 		{
 			room->current_link = cur_room;
 			graph_course(cur_room, lemin);

@@ -24,8 +24,10 @@ static void	print_room_list(t_list *run, t_lemin *lemin)
 	{
 		room = (t_room *)run->content;
 		ft_printf("\033[31m\n%s\033[0m\n", room->name);
-		ft_printf("\033[35mdistance to start: %d\033[0m\n",
-					(int)room->d_to_start);
+		ft_printf("\033[35mdistance from start: %d\033[0m\n",
+					(int)room->d_start);
+		ft_printf("\033[35mdistance from end: %d\033[0m\n",
+					(int)room->d_end);
 		ft_printf("\033[35mstate: %s\033[0m\n",
 					room->mark == DEAD ? "DEAD" : "OK");
 		if (room == lemin->start_room)
@@ -46,6 +48,7 @@ void	print_graph(t_lemin *lemin)
 				lemin->start_room->name, lemin->end_room->name);
 	print_room_list(lemin->main_list_room, lemin);
 	ft_printf("Total ants: \033[36m%d\033[0m\n", (int)lemin->total_ants);
+	ft_printf("Max ways: \033[36m%d\033[0m\n", (int)lemin->nb_max_ways);
 	ft_printf("\033[33m\n#########################\033[0m\n");
 }
 
