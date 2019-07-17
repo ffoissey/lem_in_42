@@ -36,10 +36,9 @@ int					main(void)
 	lemin.nb_max_ways = get_nb_max_ways(&lemin);
 	set_distance_from_start(lemin.start_room, &lemin, 0);
 	set_distance_from_end(lemin.end_room, &lemin, 0);
-//	print_graph(&lemin);	/// GRAPH DEBUG
+	print_graph(&lemin);	/// GRAPH DEBUG
 	graph_course(&lemin);
 	ways_selection(&lemin); // WAYS SELECTION
-	print_list_ways(&lemin); /// POSSIBLE WAY LIST DEBUG
 	return (EXIT_SUCCESS);
 	result = NULL;
 	while (is_completed(&lemin) == FALSE)

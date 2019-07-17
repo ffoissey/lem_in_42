@@ -128,6 +128,7 @@ SRCS += lemin.c
 SRCS += error.c
 SRCS += exit_routine.c
 SRCS += ways_selection.c
+SRCS += save_way.c
 SRCS += graph_course.c
 SRCS += distance_to_start.c
 SRCS += tools.c

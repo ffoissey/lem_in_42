@@ -36,6 +36,13 @@
 # define DEAD				2
 
 /*
+**** Distance
+*/
+
+# define D_START			0
+# define D_END				1
+
+/*
 *****************
 ***** ERROR *****
 *****************
@@ -148,6 +155,7 @@ typedef int8_t	(*t_parsing)(t_lemin *, char *);
 **********************
 */
 
+int8_t	save_the_way(t_lemin *lemin);
 int8_t	graph_course(t_lemin *lemin);
 void	ways_selection(t_lemin *lemin);
 int8_t	set_distance_from_start(t_room *room, t_lemin *lemin, size_t distance);

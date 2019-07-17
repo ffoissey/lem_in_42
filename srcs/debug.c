@@ -75,7 +75,7 @@ void	print_list_ways(t_lemin *lemin)
 	t_way	*way;
 	t_list	*lst;
 
-	lst = lemin->way_list;
+	lst = lemin->possible_way_list;
 	while (lst != NULL)
 	{
 		way = (t_way *)lst->content;

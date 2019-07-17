@@ -17,25 +17,19 @@ int8_t	set_distance_from_start(t_room *room, t_lemin *lemin, size_t distance)
 	t_list *links;
 	t_room *cur_room;
 
-	if (room == lemin->end_room)
-	{
-		room->d_start = distance;
+	if (distance != 0 && room == lemin->start_room)
 		return (SUCCESS);
-	}
-	else if (room == NULL || (distance != 0 && room == lemin->start_room)
-			|| distance > lemin->total_ants)
-		return (FAILURE);
-	links = room->links;
 	room->d_start = distance;
-	room->mark = DEAD;
+	if (room == lemin->end_room)
+		return (SUCCESS);
+	if (room->nb_links < 2 && room != lemin->start_room)
+		room->mark = DEAD;
+	links = room->links;
 	while (links != NULL)
 	{
 		cur_room = (t_room *)links->content;
 		if (cur_room->d_start == 0 || cur_room->d_start > distance)
-		{
-			if (set_distance_from_start(cur_room, lemin, distance + 1) == SUCCESS)
-				room->mark = UNMARK;
-		}
+			set_distance_from_start(cur_room, lemin, distance + 1);
 		links = links->next;
 	}
 	return (SUCCESS);
@@ -46,25 +40,19 @@ int8_t	set_distance_from_end(t_room *room, t_lemin *lemin, size_t distance)
 	t_list *links;
 	t_room *cur_room;
 
-	if (room == lemin->start_room)
-	{
-		room->d_end = distance;
+	if (distance != 0 && room == lemin->end_room)
 		return (SUCCESS);
-	}
-	else if (room == NULL || (distance != 0 && room == lemin->end_room)
-			|| distance > lemin->total_ants)
-		return (FAILURE);
-	links = room->links;
 	room->d_end = distance;
-	//room->mark = DEAD;
+	if (room == lemin->start_room)
+		return (SUCCESS);
+	if (room->nb_links < 2 && room != lemin->end_room)
+		room->mark = DEAD;
+	links = room->links;
 	while (links != NULL)
 	{
 		cur_room = (t_room *)links->content;
 		if (cur_room->d_end == 0 || cur_room->d_end > distance)
-		{
-			if (set_distance_from_end(cur_room, lemin, distance + 1) == SUCCESS)
-				room->mark = UNMARK;
-		}
+			set_distance_from_end(cur_room, lemin, distance + 1);
 		links = links->next;
 	}
 	return (SUCCESS);

@@ -61,6 +61,7 @@ void			ways_selection(t_lemin *lemin)
 	size_t	nb_max_ways;
 
 	ft_lst_mergesort(&lemin->possible_way_list, sort_by_size);
+	print_list_ways(lemin); /// POSSIBLE WAY LIST DEBUG
 	lemin->nb_max_ways = get_nb_max_ways(lemin);
 	nb_max_ways = lemin->nb_max_ways;
 	while (nb_max_ways > 0 && lemin->way_list == NULL)

@@ -12,72 +12,58 @@
 
 #include "lemin.h"
 
-static	void	add_way(t_lemin *lemin, t_way *way)
+static uint8_t	is_better_distance(size_t *distance, t_room *room, uint8_t opt)
 {
-	t_list	*new;
-
-	new = ft_lstnew_nomalloc(way, sizeof(t_way));
-	ft_lstadd_back(&(lemin->possible_way_list), new);
-	lemin->nb_ways++;
-	//DEBUG
-}
-
-int8_t		save_the_way(t_lemin *lemin)
-{
-	t_room	*room;
-	t_list	*new;
-	t_way	*way;
-
-	way = ft_memalloc(sizeof(t_way));
-	if (way == NULL)
-		return (FAILURE);
-	room = lemin->end_room;
-	while (room != lemin->start_room)
+	if (opt == D_START)
 	{
-		way->size++;
-		new = ft_lstnew_nomalloc(room, sizeof(t_room));
-		ft_lstadd(&(way->list), new);
-		room = room->current_link;
+		if (*distance > room->d_start)
+		{
+			*distance = room->d_start;
+			return (TRUE);
+		}
 	}
-	way->size++;
-	new = ft_lstnew_nomalloc(room, sizeof(t_room));
-	ft_lstadd(&(way->list), new);
-	add_way(lemin, way);
-	return (SUCCESS);
+	else
+	{
+		if (*distance > room->d_end)
+		{
+			*distance = room->d_end;
+			return (TRUE);
+		}
+	}
+	return (FALSE);
 }
 
-t_room			*get_end_best_room(t_room *room, size_t *i, t_lemin *lemin)
+t_room			*get_best_room(t_room *room, t_lemin *lemin, uint8_t opt)
 {
 	t_list *links;
 	t_room	*best_room;
 	t_room	*cur_room;
-	size_t	d_from_start;
+	size_t	distance;
+	size_t	i;
 
-	d_from_start = room->d_start;
+	distance = opt == D_START ? room->d_start : room->d_end;
 	best_room = NULL;
 	links = room->links;
-	(void)lemin;
+	i = 0;
 	while (links != NULL)
 	{
 		cur_room = (t_room *)links->content;
 		if (cur_room->mark != DEAD)
 		{
-			if (d_from_start > cur_room->d_start)
-			{
-				d_from_start = cur_room->d_start;
+			if (is_better_distance(&distance, cur_room, opt) == TRUE)
 				best_room = cur_room;
-			}
-			(*i)++;
+			i++;
 		}
 		links = links->next;
 	}
+	if (best_room != NULL && best_room != lemin->end_room)
+		room->nb_links = i;
 	return (best_room);
 }
 
 int8_t				go_to_start(t_room *room, t_lemin *lemin)
 {
 	t_room	*best_room;
-	size_t	i;
 
 	if (room == lemin->start_room)
 	{
@@ -85,61 +71,33 @@ int8_t				go_to_start(t_room *room, t_lemin *lemin)
 			return (FAILURE);
 		return (SUCCESS);
 	}
-	i = 0;
-	if ((best_room = get_end_best_room(room, &i, lemin)) != NULL)
+	if (room == lemin->end_room)
+		return (FAILURE);
+	if (room->nb_links < 3)
+		room->mark = DEAD;
+	if ((best_room = get_best_room(room, lemin, D_START)) != NULL)
 	{
 		room->current_link = best_room;
-		if (go_to_start(best_room, lemin) == SUCCESS)
-		{
-			if (i < 3 && room != lemin->end_room)
-				room->mark = DEAD;
-			return (SUCCESS);
-		}
+		return (go_to_start(best_room, lemin));
 	}
 	return (FAILURE);
 }
 
-t_room			*get_start_best_room(t_room *room, size_t *i, t_lemin *lemin)
-{
-	t_list *links;
-	t_room	*best_room;
-	t_room	*cur_room;
-	size_t	d_from_end;
-
-	d_from_end = room->d_end;
-	best_room = NULL;
-	links = room->links;
-	(void)lemin;
-	while (links != NULL)
-	{
-		cur_room = (t_room *)links->content;
-		if (cur_room->mark != DEAD)
-		{
-			if (d_from_end > cur_room->d_end)
-			{
-				d_from_end = cur_room->d_end;
-				best_room = cur_room;
-			}
-			(*i)++;
-		}
-		links = links->next;
-	}
-	return (best_room);
-}
 
 int8_t			roll_back_to_end(t_room *room, t_lemin *lemin)
 {
 	t_room	*best_room;
-	size_t	i;
 
 	if (room == lemin->end_room)
 		return (SUCCESS);
-	i = 0;
-	if ((best_room = get_start_best_room(room, &i, lemin)) != NULL)
+	if (room == lemin->start_room)
+		return (FAILURE);
+	if (room->nb_links < 3)
+		room->mark = DEAD;
+	if ((best_room = get_best_room(room, lemin, D_END)) != NULL)
 	{
 		best_room->current_link = room;
-		if (roll_back_to_end(best_room, lemin) == SUCCESS)
-			return (SUCCESS);
+		return (roll_back_to_end(best_room, lemin));
 	}
 	return (FAILURE);
 }
