@@ -111,7 +111,10 @@ typedef struct		s_coord
 typedef struct		s_way
 {
 	t_list			*list;
+	t_list			*link;
 	size_t			size;
+	size_t			nb_links;
+	uint8_t			id;
 }					t_way;
 
 typedef struct		s_ant
@@ -141,6 +144,7 @@ typedef struct		s_lemin
 	t_list			*possible_way_list;
 	t_list			*way_list;
 	size_t			nb_ways;
+	size_t			nb_possible_ways;
 	size_t			nb_max_ways;
 	size_t			total_ants;
 	enum e_state	state;
@@ -155,6 +159,7 @@ typedef int8_t	(*t_parsing)(t_lemin *, char *);
 **********************
 */
 
+void	get_way_links(t_lemin *lemin);
 int8_t	save_the_way(t_lemin *lemin);
 int8_t	graph_course(t_lemin *lemin);
 void	ways_selection(t_lemin *lemin);
