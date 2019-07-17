@@ -39,6 +39,7 @@ int					main(void)
 	print_graph(&lemin);	/// GRAPH DEBUG
 	graph_course(&lemin);
 	ways_selection(&lemin); // WAYS SELECTION
+	print_list_ways(&lemin); /// POSSIBLE WAY LIST DEBUG
 	return (EXIT_SUCCESS);
 	result = NULL;
 	while (is_completed(&lemin) == FALSE)

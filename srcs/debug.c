@@ -75,12 +75,12 @@ void	print_list_ways(t_lemin *lemin)
 	t_way	*way;
 	t_list	*lst;
 
-	lst = lemin->possible_way_list;
+	lst = lemin->way_list;
 	while (lst != NULL)
 	{
 		way = (t_way *)lst->content;
 		print_way(way);
 		lst = lst->next;
 	}
-	ft_printf("count possible_ways: %d\n", (int)lemin->nb_ways);
+	ft_printf("count ways: %d\n", (int)lemin->nb_ways);
 }

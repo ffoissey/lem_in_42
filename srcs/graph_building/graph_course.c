@@ -33,7 +33,7 @@ static uint8_t	is_better_distance(size_t *distance, t_room *room, uint8_t opt)
 	return (FALSE);
 }
 
-t_room			*get_best_room(t_room *room, t_lemin *lemin, uint8_t opt)
+static t_room	*get_best_room(t_room *room, t_lemin *lemin, uint8_t opt)
 {
 	t_list *links;
 	t_room	*best_room;
@@ -61,7 +61,7 @@ t_room			*get_best_room(t_room *room, t_lemin *lemin, uint8_t opt)
 	return (best_room);
 }
 
-int8_t				go_to_start(t_room *room, t_lemin *lemin)
+static int8_t	go_to_start(t_room *room, t_lemin *lemin)
 {
 	t_room	*best_room;
 
@@ -71,9 +71,7 @@ int8_t				go_to_start(t_room *room, t_lemin *lemin)
 			return (FAILURE);
 		return (SUCCESS);
 	}
-	if (room == lemin->end_room)
-		return (FAILURE);
-	if (room->nb_links < 3)
+	if (room != lemin->end_room && room->nb_links < 3)
 		room->mark = DEAD;
 	if ((best_room = get_best_room(room, lemin, D_START)) != NULL)
 	{
@@ -83,8 +81,7 @@ int8_t				go_to_start(t_room *room, t_lemin *lemin)
 	return (FAILURE);
 }
 
-
-int8_t			roll_back_to_end(t_room *room, t_lemin *lemin)
+static int8_t	roll_back_to_end(t_room *room, t_lemin *lemin)
 {
 	t_room	*best_room;
 
@@ -102,7 +99,7 @@ int8_t			roll_back_to_end(t_room *room, t_lemin *lemin)
 	return (FAILURE);
 }
 
-int8_t				graph_course(t_lemin *lemin)
+int8_t			graph_course(t_lemin *lemin)
 {
 	t_list	*run;
 	t_room *cur_room;
@@ -111,7 +108,9 @@ int8_t				graph_course(t_lemin *lemin)
 	while (run != NULL)
 	{
 		cur_room = (t_room *)run->content;
-		if (cur_room->mark != DEAD && cur_room != lemin->end_room)
+		if (cur_room->nb_links == 0)
+			cur_room->mark = DEAD;
+		if (cur_room->mark != DEAD && cur_room != lemin->start_room)
 		{
 			if (roll_back_to_end(cur_room, lemin) == SUCCESS)
 				go_to_start(cur_room, lemin);

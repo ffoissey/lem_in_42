@@ -178,6 +178,7 @@ void		print_error(uint32_t error);
 **** Tools
 */
 
+void		delete_duplicate_ways(t_lemin *lemin);
 void		mark_way(t_list *lst, uint8_t mark);
 uint8_t		is_way_free(t_list *lst);
 size_t		get_nb_max_ways(t_lemin *lemin);
