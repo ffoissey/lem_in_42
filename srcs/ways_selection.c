@@ -12,7 +12,7 @@ int				sort_by_size(void *content1, void *content2)
 	return (way1->size < way2->size);
 }
 
-static void		reset_ways(t_lemin *lemin)
+void		reset_ways(t_lemin *lemin)
 {
 	t_way	*way;
 	t_list	*way_list;
@@ -31,18 +31,16 @@ static size_t	try_to_match(t_lemin *lemin, t_list *way_list,
 {
 	t_way	*way;
 	t_list	*new_way;
-	uint8_t	need_reset;
 
-	need_reset = FALSE;
 	if (count == nb_ways)
 		return (SUCCESS);
 	while (way_list != NULL)
 	{
 		way = (t_way *)way_list->content;
 		if ((nb_ways == 1 || way->size < lemin->total_ants + 1)
-			 && mark_way(way->list->next, MARK) == SUCCESS)
+			 && is_way_free(way->list) == TRUE)
 		{
-			need_reset = TRUE;
+			mark_way(way->list, MARK);
 			if (try_to_match(lemin, way_list->next, count + 1,
 						nb_ways) == SUCCESS)
 			{
@@ -50,12 +48,12 @@ static size_t	try_to_match(t_lemin *lemin, t_list *way_list,
 				ft_lstadd(&lemin->way_list, new_way);
 				return (SUCCESS);
 			}
+			mark_way(way->list, UNMARK);
 		}
 		way_list = way_list->next;
 	}
-	if (need_reset == TRUE)
-		reset_ways(lemin);
 	return (FAILURE);
+	reset_ways(lemin);
 }
 
 void			ways_selection(t_lemin *lemin)
@@ -70,5 +68,4 @@ void			ways_selection(t_lemin *lemin)
 		try_to_match(lemin, lemin->possible_way_list, 0, nb_max_ways);
 		nb_max_ways--;
 	}
-	print_list_ways(lemin); /// POSSIBLE WAY LIST DEBUG
 }

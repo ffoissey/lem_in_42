@@ -56,7 +56,7 @@ int8_t	set_distance_from_end(t_room *room, t_lemin *lemin, size_t distance)
 		return (FAILURE);
 	links = room->links;
 	room->d_end = distance;
-	room->mark = DEAD;
+	//room->mark = DEAD;
 	while (links != NULL)
 	{
 		cur_room = (t_room *)links->content;

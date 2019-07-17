@@ -82,5 +82,5 @@ void	print_list_ways(t_lemin *lemin)
 		print_way(way);
 		lst = lst->next;
 	}
-	ft_printf("count: %d\n", (int)lemin->nb_ways);
+	ft_printf("count possible_ways: %d\n", (int)lemin->nb_ways);
 }
