@@ -27,7 +27,6 @@ int					main(void)
 	char	*result;
 
 	ft_bzero(&lemin, sizeof(lemin));
-	/////////////PARSING
 	if (parser(&lemin) == FAILURE)
 	{
 		print_error(lemin.error);
@@ -37,13 +36,10 @@ int					main(void)
 	lemin.nb_max_ways = get_nb_max_ways(&lemin);
 	set_distance_from_start(lemin.start_room, &lemin, 0);
 	set_distance_from_end(lemin.end_room, &lemin, 0);
-	print_graph(&lemin); /// DEBUG
-	//return (EXIT_SUCCESS);
-	ft_printf("starting graph_course...\n");
+	print_graph(&lemin);	/// GRAPH DEBUG
 	graph_course(&lemin);
-	ft_printf("count: %zu\n", lemin.nb_ways);
-	return (EXIT_SUCCESS);
 	ways_selection(&lemin); // WAYS SELECTION
+	return (EXIT_SUCCESS);
 	result = NULL;
 	while (is_completed(&lemin) == FALSE)
 	{

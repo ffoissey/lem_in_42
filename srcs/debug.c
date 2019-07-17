@@ -52,9 +52,10 @@ void	print_graph(t_lemin *lemin)
 	ft_printf("Total ants: \033[36m%d\033[0m\n", (int)lemin->total_ants);
 	ft_printf("Max ways: \033[36m%d\033[0m\n", (int)lemin->nb_max_ways);
 	ft_printf("\033[33m\n#########################\033[0m\n");
+	ft_printf("\nStarting graph_course...\n\n");
 }
 
-void	print_way(t_way *way)
+static void	print_way(t_way *way)
 {
 	t_list	*list;
 
@@ -67,4 +68,19 @@ void	print_way(t_way *way)
 		list = list->next;
 	}
 	ft_printf("\n");
+}
+
+void	print_list_ways(t_lemin *lemin)
+{
+	t_way	*way;
+	t_list	*lst;
+
+	lst = lemin->way_list;
+	while (lst != NULL)
+	{
+		way = (t_way *)lst->content;
+		print_way(way);
+		lst = lst->next;
+	}
+	ft_printf("count: %d\n", (int)lemin->nb_ways);
 }

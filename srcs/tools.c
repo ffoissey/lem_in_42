@@ -3,14 +3,14 @@
 int8_t		mark_way(t_list *lst, uint8_t mark)
 {
 	t_room *room;
+	t_list	*head;
 
-	while (lst != NULL)
+	head = lst;
+	while (lst != NULL && lst->next != NULL)
 	{
 		room = (t_room *)lst->content;
-		if (room == NULL)
-			continue ;
-		else if (mark == UNMARK)
-				room->mark = UNMARK;
+		if (mark == UNMARK)
+			room->mark = UNMARK;
 		else if (mark == MARK)
 		{
 			if (room->mark == MARK)

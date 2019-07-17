@@ -208,6 +208,6 @@ int8_t		create_room_node(t_lemin *lemin, t_room *room, uint8_t cmd);
 */
 
 void	print_graph(t_lemin *lemin);
-void	print_way(t_way *way);
+void	print_list_ways(t_lemin *lemin);
 
 #endif

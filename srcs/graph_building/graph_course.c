@@ -17,10 +17,9 @@ static	void	add_way(t_lemin *lemin, t_way *way)
 	t_list	*new;
 
 	new = ft_lstnew_nomalloc(way, sizeof(t_way));
-	ft_lstadd_back(&(lemin->way_list), new);
+	ft_lstadd_back(&(lemin->possible_way_list), new);
 	lemin->nb_ways++;
 	//DEBUG
-	print_way(way);
 }
 
 int8_t		save_the_way(t_lemin *lemin)
