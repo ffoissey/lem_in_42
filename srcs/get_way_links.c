@@ -20,7 +20,7 @@ uint8_t		match_with_others(t_way *way, t_list *way_list)
 	return (TRUE);
 }
 
-void		create_way_link(t_way *way, t_list *way_list)
+void		create_way_link(t_way *way, t_list *way_list, t_lemin *lemin)
 {
 	t_way	*cur_way;
 	t_list	*way_node;
@@ -30,7 +30,8 @@ void		create_way_link(t_way *way, t_list *way_list)
 	while (way_list != NULL)
 	{
 		cur_way = (t_way *)way_list->content;
-		if (is_way_free(cur_way->list) == TRUE)
+		if (cur_way->size <= lemin->total_ants
+				&& is_way_free(cur_way->list) == TRUE)
 		{
 			if (match_with_others(cur_way, way->link) == TRUE)
 			{
@@ -53,7 +54,7 @@ void		get_way_links(t_lemin *lemin)
 	way_list = lemin->possible_way_list;
 	while (way_list != NULL)
 	{
-		create_way_link(way_list->content, lemin->possible_way_list);
+		create_way_link(way_list->content, lemin->possible_way_list, lemin);
 		way_list = way_list->next;
 	}
 }
