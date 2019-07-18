@@ -12,27 +12,29 @@ int				sort_by_size(void *content1, void *content2)
 	return (way1->size < way2->size);
 }
 
-static void		get_better_ways_set(t_lemin *lemin)
+t_setup		*get_better_setup(t_lemin *lemin, t_list *setup_list)
 {
-	t_list	*way_list;
-	t_way	*way;
-	t_list	*better_list;
-	size_t	better_size;
+	t_setup	*setup;
+	t_setup	*better_setup;
+	float	better_size;
 
-	way_list = lemin->possible_way_list;
+	better_setup = NULL;
 	better_size = 0;
-	while (way_list != NULL)
+	while (setup_list != NULL)
 	{
-		way = (t_way *)way_list->content;
-		if (way->nb_links > better_size)
+		setup = (t_setup *)setup_list->content;
+		if (setup->nb_ways > 0)
 		{
-			better_size = way->nb_links;
-			better_list = way->link;
+			if (better_size == 0
+				|| (float)((lemin->total_ants + setup->size) / setup->nb_ways) < better_size)
+			{
+				better_size = (float)((lemin->total_ants + setup->size) / setup->nb_ways);
+				better_setup = setup; 
+			}
 		}
-		way_list = way_list->next;
+		setup_list = setup_list->next;
 	}
-	lemin->way_list = better_list;
-	lemin->nb_ways = better_size;
+	return (better_setup);
 }
 
 void			ways_selection(t_lemin *lemin)
@@ -46,6 +48,8 @@ void			ways_selection(t_lemin *lemin)
 	}
 	delete_duplicate_ways(lemin);
 	get_way_links(lemin);
-	get_better_ways_set(lemin);
+	lemin->better_setup = get_better_setup(lemin, lemin->setup_list);
+	lemin->way_list = lemin->better_setup->way_list;
+	lemin->nb_ways = lemin->better_setup->nb_ways;
 	ft_lst_mergesort(&lemin->way_list, sort_by_size);
 }

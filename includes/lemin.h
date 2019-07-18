@@ -6,7 +6,7 @@
 /*   By: ffoissey <ffoisssey@student.42.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/10 17:19:59 by ffoissey          #+#    #+#             */
-/*   Updated: 2019/07/16 20:17:01 by ffoissey         ###   ########.fr       */
+/*   Updated: 2019/07/18 19:18:28 by ffoissey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,12 +108,21 @@ typedef struct		s_coord
 	size_t			y;
 }					t_coord;
 
+typedef struct		s_setup
+{
+	t_list	*way_list;
+	size_t	size;
+	size_t	nb_ways;
+}					t_setup;
+
 typedef struct		s_way
 {
 	t_list			*list;
 	t_list			*link;
+	t_list			*setup_list;
 	size_t			size;
 	size_t			nb_links;
+	size_t			way_total_size;
 	uint8_t			id;
 }					t_way;
 
@@ -141,6 +150,8 @@ typedef struct		s_lemin
 	t_list			*main_list_room;
 	t_room			*start_room;
 	t_room			*end_room;
+	t_list			*setup_list;
+	t_setup			*better_setup;
 	t_list			*possible_way_list;
 	t_list			*way_list;
 	size_t			nb_ways;
@@ -159,6 +170,7 @@ typedef int8_t	(*t_parsing)(t_lemin *, char *);
 **********************
 */
 
+t_setup		*get_better_setup(t_lemin *lemin, t_list *setup_list);
 void	get_way_links(t_lemin *lemin);
 int8_t	save_the_way(t_lemin *lemin);
 int8_t	graph_course(t_lemin *lemin);
@@ -183,6 +195,7 @@ void		print_error(uint32_t error);
 **** Tools
 */
 
+int			sort_by_size(void *content1, void *content2);
 void		delete_duplicate_ways(t_lemin *lemin);
 void		mark_way(t_list *lst, uint8_t mark);
 uint8_t		is_way_free(t_list *lst);

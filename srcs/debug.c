@@ -67,7 +67,20 @@ static void	print_way(t_way *way)
 			ft_printf("-->");
 		list = list->next;
 	}
-	ft_printf("\n");
+	ft_printf("\nSIZE: %d\n", (int)way->size);
+}
+
+void	print_way_links(t_way *way)
+{
+	t_list	*list;
+
+	list = way->link;
+	ft_printf("SET: \n");
+	while (list != NULL)
+	{
+		print_way((t_way *)list->content);
+		list = list->next;
+	}
 }
 
 void	print_list_ways(t_lemin *lemin)
@@ -83,4 +96,5 @@ void	print_list_ways(t_lemin *lemin)
 		lst = lst->next;
 	}
 	ft_printf("count ways: %d\n", (int)lemin->nb_ways);
+	ft_printf("nb ants: %d\n", (int)lemin->total_ants);
 }
