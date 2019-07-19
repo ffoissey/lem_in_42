@@ -119,6 +119,7 @@ typedef struct		s_way
 {
 	t_list			*list;
 	t_list			*link;
+	t_setup			setup;
 	t_list			*setup_list;
 	size_t			size;
 	size_t			nb_links;

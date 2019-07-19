@@ -26,9 +26,9 @@ t_setup		*get_better_setup(t_lemin *lemin, t_list *setup_list)
 		if (setup->nb_ways > 0)
 		{
 			if (better_size == 0
-				|| (float)((lemin->total_ants + setup->size) / setup->nb_ways) < better_size)
+				|| (float)((float)((float)lemin->total_ants + (float)setup->size) / (float)setup->nb_ways) < better_size)
 			{
-				better_size = (float)((lemin->total_ants + setup->size) / setup->nb_ways);
+				better_size = (float)((float)((float)lemin->total_ants + (float)setup->size) / (float)setup->nb_ways);
 				better_setup = setup; 
 			}
 		}
