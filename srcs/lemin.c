@@ -21,6 +21,43 @@ static uint8_t		is_completed(t_lemin *lemin)
 	return (FALSE);
 }
 
+static size_t		get_worst_score(t_lemin *lemin)
+{
+	t_list	*link;
+	t_room	*room;
+	size_t	score;
+
+	score = 0;
+	if (lemin->end_room->nb_links > lemin->start_room->nb_links)
+		link = lemin->start_room->links;
+	else
+		link = lemin->end_room->links;
+	
+	while (link != NULL)
+	{
+		room = (t_room *)link->content;
+		if (room->mark != DEAD && (score == 0 || score < room->score))
+			score = room->score;
+		link = link->next;
+	}
+	return (score);
+}
+
+void				mark_dead_rooms(t_lemin *lemin)
+{
+	t_room *room;
+	t_list	*list;
+
+	list = lemin->main_list_room;
+	while (list != NULL)
+	{
+		room = (t_room *)list->content;
+		if (room->score > lemin->max_score)
+			room->mark = DEAD;
+		list = list->next;
+	}
+}
+
 int					main(void)
 {
 	t_lemin lemin;
@@ -36,8 +73,13 @@ int					main(void)
 	lemin.nb_max_ways = get_nb_max_ways(&lemin);
 	set_distance_from_start(lemin.start_room, &lemin, 0);
 	set_distance_from_end(lemin.end_room, &lemin, 0);
-//	print_graph(&lemin);	/// GRAPH DEBUG
+	lemin.max_score = get_worst_score(&lemin);
+	mark_dead_rooms(&lemin);
+	print_graph(&lemin);	/// GRAPH DEBUG
 	graph_course(&lemin);
+	//graph_course(lemin.end_room, &lemin);
+//	return (EXIT_FAILURE);
+	ft_putendl("OK");
 	ways_selection(&lemin); // WAYS SELECTION
 	print_list_ways(&lemin); /// POSSIBLE WAY LIST DEBUG
 	return (EXIT_SUCCESS);

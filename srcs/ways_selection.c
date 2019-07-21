@@ -40,7 +40,6 @@ t_setup		*get_better_setup(t_lemin *lemin, t_list *setup_list)
 void			ways_selection(t_lemin *lemin)
 {
 	ft_lst_mergesort(&lemin->possible_way_list, sort_by_size);
-	lemin->nb_max_ways = get_nb_max_ways(lemin);
 	if (lemin->nb_ways == 0 || lemin->nb_max_ways == 0)
 	{
 		ft_printf("No way is possible\n");

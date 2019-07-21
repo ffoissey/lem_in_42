@@ -136,12 +136,14 @@ typedef struct		s_ant
 typedef struct		s_room
 {
 	t_list			*links;
+	size_t			hits;
 	struct	s_room	*current_link;
 	char			*name;
 	size_t			d_start;
 	size_t			d_end;
 	size_t			nb_links;
 	size_t			ants;
+	size_t			score;
 	t_coord			coord;
 	uint8_t			mark;
 }					t_room;
@@ -159,6 +161,7 @@ typedef struct		s_lemin
 	size_t			nb_possible_ways;
 	size_t			nb_max_ways;
 	size_t			total_ants;
+	size_t			max_score;
 	enum e_state	state;
 	uint32_t		error;
 }					t_lemin;			
@@ -175,6 +178,7 @@ t_setup		*get_better_setup(t_lemin *lemin, t_list *setup_list);
 void	get_way_links(t_lemin *lemin);
 int8_t	save_the_way(t_lemin *lemin);
 int8_t	graph_course(t_lemin *lemin);
+//int				graph_course(t_room *room, t_lemin *lemin);
 void	ways_selection(t_lemin *lemin);
 int8_t	set_distance_from_start(t_room *room, t_lemin *lemin, size_t distance);
 int8_t	set_distance_from_end(t_room *room, t_lemin *lemin, size_t distance);

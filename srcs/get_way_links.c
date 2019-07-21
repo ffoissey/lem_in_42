@@ -76,6 +76,7 @@ void		create_potential_links(t_way *way, t_list *way_list)
 		}
 		way_list = way_list->next;
 	}
+//	ft_printf("nb_links : %d\n", nb_links
 	mark_way(way->list, UNMARK);
 	ft_lst_mergesort(&way->link, sort_by_size);
 }
@@ -93,7 +94,7 @@ void		get_way_links(t_lemin *lemin)
 		way->setup.nb_ways = 0;
 		way->setup.size = 0;
 		way->setup.way_list = NULL;
-		create_potential_links(way, lemin->possible_way_list);
+		create_potential_links(way, way_list);
 		get_way_setup(way, way->link, 0, 0, lemin);
 		node = ft_lstnew_nomalloc(&way->setup, sizeof(t_setup *));
 		ft_lstadd(&lemin->setup_list, node);

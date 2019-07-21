@@ -14,8 +14,8 @@
 
 static uint8_t	is_better_distance(size_t *d_start, size_t *d_end, t_room *room, uint8_t opt)
 {
-//	if (room->mark == DEAD)
-//		return (FALSE);
+	if (room->mark == DEAD)
+		return (FALSE);
 	if (opt == D_START)
 	{
 		if (*d_start > room->d_start
@@ -28,8 +28,7 @@ static uint8_t	is_better_distance(size_t *d_start, size_t *d_end, t_room *room, 
 	}
 	else
 	{
-		if (*d_end > room->d_end
-			|| (*d_end == room->d_end && *d_start < room->d_start))
+		if (*d_end > room->d_end)
 		{
 			*d_start = room->d_start;
 			*d_end = room->d_end;
@@ -54,8 +53,9 @@ static t_room	*get_best_room(t_room *room, t_lemin *lemin, uint8_t opt)
 	while (links != NULL)
 	{
 		cur_room = (t_room *)links->content;
-		if (is_better_distance(&d_start, &d_end, cur_room, opt) == TRUE)
-			best_room = cur_room;
+		if (room->score <= lemin->max_score
+			&& is_better_distance(&d_start, &d_end, cur_room, opt) == TRUE)
+			return (best_room = cur_room);
 		links = links->next;
 	}
 	(void)lemin;
@@ -103,9 +103,7 @@ int8_t			graph_course(t_lemin *lemin)
 	while (run != NULL)
 	{
 		cur_room = (t_room *)run->content;
-		if (cur_room->nb_links < 2)
-			cur_room->mark = DEAD;
-		else if (cur_room->mark != DEAD && cur_room != lemin->start_room)
+		if (cur_room->mark != DEAD && cur_room != lemin->start_room)
 		{
 			if (roll_back_to_end(cur_room, lemin) == SUCCESS)
 				go_to_start(cur_room, lemin);
@@ -114,3 +112,47 @@ int8_t			graph_course(t_lemin *lemin)
 	}
 	return (SUCCESS);	
 }
+
+/*
+static uint8_t	is_room_ok(t_room *cur_room, t_room *room, t_lemin *lemin)
+{
+	if (cur_room->mark != UNMARK)
+		return (FALSE);
+	if (cur_room->score > lemin->max_score)
+		return (FALSE);
+	(void)lemin;
+	if (cur_room == lemin->end_room)
+		return (FALSE);
+//	if (cur_room->d_end < room->d_end)
+	if (cur_room->d_start >= room->d_start && cur_room->d_end <= room->d_end)
+		return (FALSE);
+	return (TRUE);
+}
+int				graph_course(t_room *room, t_lemin *lemin)
+{
+	t_list *links;
+	t_room	*cur_room;
+
+	if (room == lemin->start_room)
+	{
+		if (save_the_way(lemin) == FAILURE)
+			return (FAILURE);
+		return (SUCCESS);
+	}
+	links = room->links;
+	if (room->mark != DEAD)
+		room->mark = MARK;
+	while (links != NULL)
+	{
+		cur_room = (t_room*)links->content;
+		if (is_room_ok(cur_room, room, lemin) == TRUE)
+		{
+			room->current_link = cur_room;
+			graph_course(cur_room, lemin);
+		}
+		links = links->next;
+	}
+	if (room->mark != DEAD)
+		room->mark = UNMARK;
+	return (SUCCESS);	
+}*/

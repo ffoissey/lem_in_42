@@ -30,6 +30,8 @@ static void	print_room_list(t_list *run, t_lemin *lemin)
 					(int)room->d_start);
 		ft_printf("\033[35mdistance from end: %d\033[0m\n",
 					(int)room->d_end);
+		ft_printf("\033[35mSCORE: %d\033[0m\n",
+					(int)room->score);
 		ft_printf("\033[35mstate: %s\033[0m\n",
 					room->mark == DEAD ? "DEAD" : "OK");
 		if (room == lemin->start_room)

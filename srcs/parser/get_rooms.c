@@ -51,11 +51,7 @@ static	size_t	get_room_coord(t_lemin *lemin, char **line)
 
 static	int8_t	room_acquisition(t_lemin *lemin, char *line, t_room *room)
 {
-	room->links = NULL;
-	room->current_link = NULL;
-	room->nb_links = 0;
-	room->d_start = 0;
-	room->d_end = 0;
+	ft_bzero(room, sizeof(t_room));
 	room->mark = UNMARK; 
 	room->name = get_room_name(lemin, line);
 	if (lemin->error)

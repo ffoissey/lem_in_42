@@ -17,6 +17,8 @@ int8_t	set_distance_from_start(t_room *room, t_lemin *lemin, size_t distance)
 	t_list *links;
 	t_room *cur_room;
 
+	if (room->mark == DEAD)
+		return (FAILURE);
 	if (distance != 0 && room == lemin->start_room)
 		return (SUCCESS);
 	room->d_start = distance;
@@ -26,15 +28,15 @@ int8_t	set_distance_from_start(t_room *room, t_lemin *lemin, size_t distance)
 	while (links != NULL)
 	{
 		cur_room = (t_room *)links->content;
-		if (cur_room->d_start == 0 || cur_room->d_start > distance)
+		if ((cur_room->d_start == 0 || cur_room->d_start > distance))
 		{
 			if (set_distance_from_start(cur_room, lemin, distance + 1) == FAILURE
-					&& room->nb_links > 0)
+					&& room->nb_links > 0 && cur_room->mark != DEAD)
 				room->nb_links--;
 		}
 		links = links->next;
 	}
-	if (room->nb_links == 1 && room != lemin->start_room)
+	if (room->nb_links < 2 && room != lemin->start_room)
 	{
 		room->mark = DEAD;
 		return (FAILURE);
@@ -47,24 +49,28 @@ int8_t	set_distance_from_end(t_room *room, t_lemin *lemin, size_t distance)
 	t_list *links;
 	t_room *cur_room;
 
+	if (room->mark == DEAD)
+		return (FAILURE);
 	if (distance != 0 && room == lemin->end_room)
 		return (SUCCESS);
 	room->d_end = distance;
+	room->score = room->d_end + room->d_start;
 	if (room == lemin->start_room)
 		return (SUCCESS);
 	links = room->links;
 	while (links != NULL)
 	{
 		cur_room = (t_room *)links->content;
-		if (cur_room->d_end == 0 || cur_room->d_end > distance)
+		if ((cur_room->d_end == 0 || cur_room->d_end > distance))
 		{
 			if (set_distance_from_end(cur_room, lemin, distance + 1) == FAILURE
-					&& room->nb_links > 0)
+					&& room->nb_links > 0 && cur_room->mark != DEAD)
 				room->nb_links--;
 		}
+
 		links = links->next;
 	}
-	if (room->nb_links == 1 && room != lemin->end_room)
+	if (room->nb_links < 2 && room != lemin->end_room)
 	{
 		room->mark = DEAD;
 		return (FAILURE);
