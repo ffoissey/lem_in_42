@@ -132,6 +132,7 @@ int				graph_course(t_room *room, t_lemin *lemin)
 	{
 		cur_room = (t_room*)links->content;
 		if (cur_room->mark == UNMARK)
+			//&& cur_room->d_start <= room->d_start)
 		{
 			room->current_link = cur_room;
 			graph_course(cur_room, lemin);

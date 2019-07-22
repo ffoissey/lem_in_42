@@ -35,6 +35,7 @@ int8_t	set_distance_from_start(t_room *room, t_lemin *lemin, size_t distance)
 				room->nb_links--;
 		}
 		links = links->next;
+
 	}
 	if (room->nb_links < 2 && room != lemin->start_room)
 	{
