@@ -38,7 +38,7 @@ int8_t			ways_selection(t_lemin *lemin)
 	ft_lst_mergesort(&lemin->possible_way_list, sort_by_size);
 	if (lemin->nb_ways == 0 || lemin->nb_max_ways == 0)
 	{
-		ft_printf("No way is possible\n");
+		ft_putendl_fd("No way is possible", 2);
 		return (FAILURE);
 	}
 	delete_duplicate_ways(lemin);
