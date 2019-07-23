@@ -116,7 +116,7 @@ HEADER += lemin.h
 
 PATH_SRCS += srcs
 PATH_SRCS += srcs/parser
-PATH_SRCS += srcs/graph_building
+PATH_SRCS += srcs/get_best_ways
 
 ################################################################################
 #################################               ################################
@@ -127,12 +127,14 @@ PATH_SRCS += srcs/graph_building
 SRCS += lemin.c
 SRCS += error.c
 SRCS += exit_routine.c
-SRCS += ways_selection.c
-SRCS += get_way_links.c
-SRCS += save_way.c
-SRCS += graph_course.c
-SRCS += distance_to_start.c
 SRCS += tools.c
+
+# Get Best Ways
+SRCS += set_distance.c
+SRCS += graph_course.c
+SRCS += save_way.c
+SRCS += get_way_links.c
+SRCS += ways_selection.c
 
 # Parser
 SRCS += parser.c

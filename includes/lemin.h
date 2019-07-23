@@ -108,23 +108,13 @@ typedef struct		s_coord
 	size_t			y;
 }					t_coord;
 
-typedef struct		s_setup
-{
-	t_list	*way_list;
-	size_t	size;
-	size_t	nb_ways;
-}					t_setup;
-
 typedef struct		s_way
 {
 	t_list			*list;
 	t_list			*link;
-	t_setup			setup;
-	t_list			*setup_list;
 	size_t			size;
 	size_t			total_size;
 	size_t			nb_links;
-	size_t			way_total_size;
 	uint8_t			id;
 }					t_way;
 
@@ -137,7 +127,6 @@ typedef struct		s_ant
 typedef struct		s_room
 {
 	t_list			*links;
-	size_t			hits;
 	struct	s_room	*current_link;
 	char			*name;
 	size_t			d_start;
@@ -154,18 +143,15 @@ typedef struct		s_lemin
 	t_list			*main_list_room;
 	t_room			*start_room;
 	t_room			*end_room;
-	t_list			*setup_list;
-	t_setup			*better_setup;
 	t_list			*possible_way_list;
 	t_list			*way_list;
 	size_t			nb_ways;
-	size_t			nb_possible_ways;
 	size_t			nb_max_ways;
 	size_t			total_ants;
 	size_t			max_score;
 	size_t			size;
-	enum e_state	state;
 	uint32_t		error;
+	enum e_state	state;
 }					t_lemin;			
 
 typedef int8_t	(*t_parsing)(t_lemin *, char *);
@@ -176,13 +162,11 @@ typedef int8_t	(*t_parsing)(t_lemin *, char *);
 **********************
 */
 
-t_setup		*get_better_setup(t_lemin *lemin, t_list *setup_list);
 void	get_way_links(t_lemin *lemin);
 int8_t	save_the_way(t_lemin *lemin);
 int8_t	graph_course(t_lemin *lemin);
-void	ways_selection(t_lemin *lemin);
-int8_t	set_distance_from_start(t_room *room, t_lemin *lemin, size_t distance);
-int8_t	set_distance_from_end(t_room *room, t_lemin *lemin, size_t distance);
+int8_t	ways_selection(t_lemin *lemin);
+void	set_distance(t_lemin *lemin);
 
 /*
 **** Exit / Free

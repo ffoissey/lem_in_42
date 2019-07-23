@@ -12,7 +12,7 @@
 
 #include "lemin.h"
 
-static	void	add_way(t_lemin *lemin, t_way *way)
+static void	add_way(t_lemin *lemin, t_way *way)
 {
 	t_list	*new;
 

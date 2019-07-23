@@ -12,20 +12,21 @@
 
 #include "lemin.h"
 
-static uint8_t	is_better_distance(size_t *d_start, size_t *d_end, t_room *room, uint8_t opt)
+static uint8_t	is_better_distance(size_t *d_start, size_t *d_end, t_room *room,
+					uint8_t opt)
 {
 	if (room->mark == DEAD)
 		return (FALSE);
 	if (opt == D_START)
 	{
-		if (*d_start <= room->d_start)// &&  *d_end <= room->d_end)
+		if (*d_start <= room->d_start)
 			return (FALSE);
 		*d_start = room->d_start;
 		*d_end = room->d_end;
 	}
 	else
 	{
-		if (*d_end <= room->d_end)// && *d_start <= room->d_start)
+		if (*d_end <= room->d_end)
 			return (FALSE);
 		*d_start = room->d_start;
 		*d_end = room->d_end;
@@ -33,48 +34,25 @@ static uint8_t	is_better_distance(size_t *d_start, size_t *d_end, t_room *room, 
 	return (TRUE);
 }
 
-static t_room	*get_best_room(t_room *room, t_lemin *lemin, uint8_t opt)
+static t_room	*get_best_room(t_room *room, uint8_t opt)
 {
 	t_list *links;
-	t_room	*best_room;
 	t_room	*cur_room;
 	size_t	d_start;
 	size_t	d_end;
 
-	(void)lemin;
 	d_start = room->d_start;
 	d_end = room->d_end;
-	best_room = NULL;
 	links = room->links;
 	while (links != NULL)
 	{
 		cur_room = (t_room *)links->content;
-		if (cur_room != room)
-		{
-			if ((opt == D_START && cur_room == lemin->start_room)
-					|| (opt == D_END && cur_room == lemin->end_room))
-				return (cur_room);
-			if (cur_room->score == room->score
-				&& is_better_distance(&d_start, &d_end, cur_room, opt) == TRUE)
-				best_room = cur_room;
-		}
+		if (cur_room->score <= room->score
+			&& is_better_distance(&d_start, &d_end, cur_room, opt) == TRUE)
+			return (cur_room);
 		links = links->next;
 	}
-	if (best_room != NULL)
-		return (best_room);
-	links = room->links;
-	while (links != NULL)
-	{
-		cur_room = (t_room *)links->content;
-		if (cur_room != room)
-		{
-			if ((best_room != NULL && cur_room->score < best_room->score) ||
-				is_better_distance(&d_start, &d_end, cur_room, opt) == TRUE)
-				best_room = cur_room;
-		}
-		links = links->next;
-	}
-	return (best_room);
+	return (NULL);
 }
 
 static int8_t	go_to_start(t_room *room, t_lemin *lemin)
@@ -87,9 +65,7 @@ static int8_t	go_to_start(t_room *room, t_lemin *lemin)
 			return (FAILURE);
 		return (SUCCESS);
 	}
-//	if (room == lemin->end_room)
-//		return (FAILURE);
-	if ((best_room = get_best_room(room, lemin, D_START)) != NULL)
+	if ((best_room = get_best_room(room, D_START)) != NULL)
 	{
 		room->current_link = best_room;
 		return (go_to_start(best_room, lemin));
@@ -103,9 +79,7 @@ static int8_t	roll_back_to_end(t_room *room, t_lemin *lemin)
 
 	if (room == lemin->end_room)
 		return (SUCCESS);
-	if (room == lemin->start_room)
-		return (FAILURE);
-	if ((best_room = get_best_room(room, lemin, D_END)) != NULL)
+	if ((best_room = get_best_room(room, D_END)) != NULL)
 	{
 		best_room->current_link = room;
 		return (roll_back_to_end(best_room, lemin));
@@ -131,4 +105,3 @@ int8_t			graph_course(t_lemin *lemin)
 	}
 	return (SUCCESS);	
 }
-
