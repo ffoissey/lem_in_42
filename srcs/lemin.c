@@ -6,7 +6,7 @@
 /*   By: ffoissey <ffoisssey@student.42.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/10 17:50:47 by ffoissey          #+#    #+#             */
-/*   Updated: 2019/07/16 20:17:03 by ffoissey         ###   ########.fr       */
+/*   Updated: 2019/07/23 15:09:19 by ffoissey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static uint8_t		is_completed(t_lemin *lemin)
 	return (FALSE);
 }
 
-static size_t		get_worst_score(t_lemin *lemin)
+size_t		get_worst_score(t_lemin *lemin)
 {
 	t_list	*link;
 	t_room	*room;
@@ -72,11 +72,13 @@ void				out_node(t_list *room_list, t_lemin *lemin)
 			while (link != NULL)
 			{
 				cur_room = (t_room *)link->content;
-				if ((cur_room->d_start > room->d_start && cur_room->d_end <= room->d_end)
-					|| cur_room->mark == DEAD
-					|| cur_room->score > lemin->max_score
+				if (//(cur_room->d_start > room->d_start && cur_room->d_end < room->d_end)
+					//||
+					cur_room->mark == DEAD
+					||
+					cur_room->score > lemin->max_score
 					|| cur_room->nb_links == 0
-					|| (cur_room->score >= room->score && cur_room->d_end <= room->d_end))
+					|| (cur_room->score > room->score && cur_room->d_end < room->d_end))
 				{
 					room->nb_links--;
 					if (room->nb_links == 0)
@@ -108,11 +110,10 @@ int					main(void)
 	set_distance_from_start(lemin.start_room, &lemin, 0);
 	set_distance_from_end(lemin.end_room, &lemin, 0);
 	lemin.max_score = get_worst_score(&lemin);
-	out_node(lemin.main_list_room, &lemin);
 	mark_dead_rooms(&lemin);
+	out_node(lemin.main_list_room, &lemin);
 	print_graph(&lemin);	/// GRAPH DEBUG
-	//graph_course(&lemin);
-	graph_course(lemin.end_room, &lemin);
+	graph_course(&lemin);
 //	return (EXIT_FAILURE);
 	ft_putendl("OK");
 	ways_selection(&lemin); // WAYS SELECTION

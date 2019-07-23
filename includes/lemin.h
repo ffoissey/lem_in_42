@@ -6,7 +6,7 @@
 /*   By: ffoissey <ffoisssey@student.42.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/10 17:19:59 by ffoissey          #+#    #+#             */
-/*   Updated: 2019/07/18 19:18:28 by ffoissey         ###   ########.fr       */
+/*   Updated: 2019/07/23 15:03:54 by ffoissey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -177,8 +177,7 @@ typedef int8_t	(*t_parsing)(t_lemin *, char *);
 t_setup		*get_better_setup(t_lemin *lemin, t_list *setup_list);
 void	get_way_links(t_lemin *lemin);
 int8_t	save_the_way(t_lemin *lemin);
-//int8_t	graph_course(t_lemin *lemin);
-int				graph_course(t_room *room, t_lemin *lemin);
+int8_t	graph_course(t_lemin *lemin);
 void	ways_selection(t_lemin *lemin);
 int8_t	set_distance_from_start(t_room *room, t_lemin *lemin, size_t distance);
 int8_t	set_distance_from_end(t_room *room, t_lemin *lemin, size_t distance);

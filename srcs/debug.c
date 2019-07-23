@@ -15,7 +15,7 @@ static void	print_room_links(t_list *run)
 	ft_putchar('\n');
 }
 
-static void	print_room_list(t_list *run, t_lemin *lemin)
+void	print_room_list(t_list *run, t_lemin *lemin)
 {
 	t_room *room;
 
@@ -97,7 +97,7 @@ void	print_list_ways(t_lemin *lemin)
 		print_way(way);
 		lst = lst->next;
 	}
-	ft_printf("\n\nSET: (size: %d | nb_links: %d)\n", (int)lemin->better_setup->size, (int)lemin->better_setup->nb_ways);
+	//ft_printf("\n\nSET: (size: %d | nb_links: %d)\n", (int)lemin->better_setup->size, (int)lemin->better_setup->nb_ways);
 	ft_printf("count ways: %d\n", (int)lemin->nb_ways);
 	ft_printf("nb ants: %d\n", (int)lemin->total_ants);
 }
