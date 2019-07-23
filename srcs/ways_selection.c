@@ -37,10 +37,54 @@ static void		get_better_ways_set(t_lemin *lemin)
 	lemin->way_list = better_list;
 }
 
+void			get_hits(t_lemin *lemin)
+{
+	t_list	*way_list;
+	t_way	*way;
+	t_list	*links;
+	t_room	*room;
+
+	way_list = lemin->possible_way_list;
+	while (way_list != NULL)
+	{
+		way = (t_way *)way_list->content;
+		links = way->link;
+		while (links != NULL)
+		{
+			room = (t_room *)links->content;
+			room->hit++;
+			links = links->next;
+		}
+		way_list = way_list->next;
+	}
+	way_list = lemin->possible_way_list;
+	while (way_list != NULL)
+	{
+		way = (t_way *)way_list->content;
+		links = way->link;
+		while (links != NULL)
+		{
+			room = (t_room *)links->content;
+			way->moy_hit += room->hit;
+			links = links->next;
+		}
+		if (way->size == 0)
+			way->moy_hit = 0;
+		else
+			way->moy_hit = way->moy_hit / way->size + way->moy_hit % way->size;
+		if (lemin->better_hits == 0 || way->moy_hit < lemin->better_hits)
+			lemin->better_hits = way->moy_hit;
+		if (lemin->max_hits == 0 || way->moy_hit > lemin->max_hits)
+			lemin->max_hits = way->moy_hit;
+		way_list = way_list->next;
+	}
+}
+
 void			ways_selection(t_lemin *lemin)
 {
 	ft_lst_mergesort(&lemin->possible_way_list, sort_by_size);
 	lemin->nb_max_ways = get_nb_max_ways(lemin);
+	get_hits(lemin);
 	if (lemin->nb_ways == 0 || lemin->nb_max_ways == 0)
 	{
 		ft_printf("No way is possible\n");

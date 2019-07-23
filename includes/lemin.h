@@ -6,7 +6,7 @@
 /*   By: ffoissey <ffoisssey@student.42.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/10 17:19:59 by ffoissey          #+#    #+#             */
-/*   Updated: 2019/07/23 18:43:33 by ffoissey         ###   ########.fr       */
+/*   Updated: 2019/07/23 19:47:02 by ffoissey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,6 +119,7 @@ typedef struct		s_way
 {
 	t_list			*list;
 	t_list			*link;
+	size_t			moy_hit;
 	t_setup			setup;
 	t_list			*setup_list;
 	size_t			size;
@@ -137,7 +138,7 @@ typedef struct		s_ant
 typedef struct		s_room
 {
 	t_list			*links;
-	size_t			hits;
+	size_t			hit;
 	struct	s_room	*current_link;
 	char			*name;
 	size_t			d_start;
@@ -155,7 +156,9 @@ typedef struct		s_lemin
 	t_room			*start_room;
 	t_room			*end_room;
 	t_list			*setup_list;
-	t_setup			*better_setup;
+//	t_setup			*better_setup;
+	size_t			better_hits;
+	size_t			max_hits;
 	t_list			*possible_way_list;
 	t_list			*way_list;
 	size_t			nb_ways;

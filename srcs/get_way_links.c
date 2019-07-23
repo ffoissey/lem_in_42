@@ -25,18 +25,21 @@ void		create_way_link(t_way *way, t_list *way_list, t_lemin *lemin)
 	t_way	*cur_way;
 	t_list	*way_node;
 	float	better_size;
+	size_t	hits;
 
-	(void)lemin;
+
+	hits = lemin->better_hits;
 	better_size = 0;
 	mark_way(way->list, MARK);
 	way->nb_links = 1;
 	way->total_size = way->size - (way->size <= lemin->total_ants ? 1 : 0);
-	while (way_list != NULL)
+	while (hits <= lemin->max_hits)
 	{
 		if (way->nb_links == lemin->total_ants)
 			break ;
 		cur_way = (t_way *)way_list->content;
-		if (is_way_free(cur_way->list) == TRUE
+		if (way->moy_hit <= hits
+			&& is_way_free(cur_way->list) == TRUE
 			&& (better_size == 0
 			|| (float)((float)(lemin->total_ants + way->total_size + cur_way->size)
 				/ (float)(way->nb_links + 1)) < better_size))
@@ -55,6 +58,11 @@ void		create_way_link(t_way *way, t_list *way_list, t_lemin *lemin)
 		}
 		else
 			way_list = way_list->next;
+		if (way_list == NULL)
+		{
+			way_list = lemin->possible_way_list;
+			hits++;
+		}
 	}
 	way_node = ft_lstnew_nomalloc(way, sizeof(t_way *));
 	ft_lstadd(&(way->link), way_node);
