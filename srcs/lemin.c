@@ -6,7 +6,7 @@
 /*   By: ffoissey <ffoisssey@student.42.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/10 17:50:47 by ffoissey          #+#    #+#             */
-/*   Updated: 2019/07/23 15:09:19 by ffoissey         ###   ########.fr       */
+/*   Updated: 2019/07/23 17:57:53 by ffoissey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,7 +112,7 @@ int					main(void)
 	lemin.max_score = get_worst_score(&lemin);
 	mark_dead_rooms(&lemin);
 	out_node(lemin.main_list_room, &lemin);
-	print_graph(&lemin);	/// GRAPH DEBUG
+//	print_graph(&lemin);	/// GRAPH DEBUG
 	graph_course(&lemin);
 //	return (EXIT_FAILURE);
 	ft_putendl("OK");

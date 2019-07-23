@@ -6,7 +6,7 @@
 /*   By: ffoissey <ffoisssey@student.42.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/16 14:39:51 by ffoissey          #+#    #+#             */
-/*   Updated: 2019/07/18 18:53:24 by ffoissey         ###   ########.fr       */
+/*   Updated: 2019/07/23 17:47:33 by ffoissey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,6 @@ int8_t		save_the_way(t_lemin *lemin)
 		ft_lstadd(&(way->list), new);
 		room = room->current_link;
 	}
-	way->size++;
 	new = ft_lstnew_nomalloc(room, sizeof(t_room));
 	ft_lstadd(&(way->list), new);
 	add_way(lemin, way);

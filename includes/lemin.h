@@ -6,7 +6,7 @@
 /*   By: ffoissey <ffoisssey@student.42.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/10 17:19:59 by ffoissey          #+#    #+#             */
-/*   Updated: 2019/07/23 15:03:54 by ffoissey         ###   ########.fr       */
+/*   Updated: 2019/07/23 18:43:33 by ffoissey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,6 +122,7 @@ typedef struct		s_way
 	t_setup			setup;
 	t_list			*setup_list;
 	size_t			size;
+	size_t			total_size;
 	size_t			nb_links;
 	size_t			way_total_size;
 	uint8_t			id;
@@ -162,6 +163,7 @@ typedef struct		s_lemin
 	size_t			nb_max_ways;
 	size_t			total_ants;
 	size_t			max_score;
+	size_t			size;
 	enum e_state	state;
 	uint32_t		error;
 }					t_lemin;			

@@ -6,7 +6,7 @@
 /*   By: ffoissey <ffoisssey@student.42.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/16 14:39:46 by ffoissey          #+#    #+#             */
-/*   Updated: 2019/07/23 14:54:18 by ffoissey         ###   ########.fr       */
+/*   Updated: 2019/07/23 17:50:53 by ffoissey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@ int8_t	set_distance_from_start(t_room *room, t_lemin *lemin, size_t distance)
 	t_list *links;
 	t_room *cur_room;
 
-//	if (room->mark == DEAD)
-//		return (FAILURE);
+	if (room->mark == DEAD)
+		return (FAILURE);
 	if (distance != 0 && room == lemin->start_room)
 		return (SUCCESS);
 	room->d_start = distance;
@@ -50,8 +50,8 @@ int8_t	set_distance_from_end(t_room *room, t_lemin *lemin, size_t distance)
 	t_list *links;
 	t_room *cur_room;
 
-//	if (room->mark == DEAD)
-//		return (FAILURE);
+	if (room->mark == DEAD)
+		return (FAILURE);
 	if (distance != 0 && room == lemin->end_room)
 		return (SUCCESS);
 	room->d_end = distance;
