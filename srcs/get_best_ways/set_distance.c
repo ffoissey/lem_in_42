@@ -29,7 +29,7 @@ static void		out_node(t_list *room_list, t_lemin *lemin)
 				cur_room = (t_room *)link->content;
 				if (cur_room->score > lemin->max_score)
 				{
-					ft_lstdelnode(&room->links, cur_room);
+					ft_lstdelnode(&room->links, cur_room, NULL);
 					link = room->links;
 				}
 				else
