@@ -16,17 +16,22 @@ static void		get_better_ways_set(t_lemin *lemin)
 {
 	t_list	*way_list;
 	t_way	*way;
+	float	cur_size;
+	float	better_size;
 
 	way_list = lemin->possible_way_list;
 	lemin->nb_ways = 0;
+	better_size = 0;
 	while (way_list != NULL)
 	{
 		way = (t_way *)way_list->content;
-		if  (way->nb_links > lemin->nb_ways)
+		cur_size = (float)((float)(lemin->total_ants + way->total_size)
+				/ (float)way->nb_links);
+		if (better_size == 0 || cur_size <= better_size)
 		{
 			lemin->nb_ways = way->nb_links;
-			lemin->size = (float)((float)(lemin->total_ants + way->total_size)
-				/ (float)way->nb_links);
+			lemin->size = (size_t)cur_size;
+			better_size = cur_size;
 			lemin->way_list = way->link;
 		}
 		way_list = way_list->next;
