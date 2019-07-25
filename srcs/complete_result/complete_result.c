@@ -76,10 +76,11 @@ static void     move_ants(t_lemin *lemin)
         cur_ant = (t_ant *)ants_list->content;
         if (cur_ant->position == lemin->start_room)
         {
-            if (way_list == NULL)
+           	if (way_list == NULL)
                 break ;
             sent_first_time(cur_ant, way_list);
-            way_list = way_list->next;
+			if (lemin->oneshot == FALSE)
+				way_list = way_list->next;
         }
         else
             find_ant_room_and_move(cur_ant, lemin);

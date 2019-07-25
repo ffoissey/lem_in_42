@@ -27,10 +27,12 @@ static void		get_better_ways_set(t_lemin *lemin)
 		way = (t_way *)way_list->content;
 		cur_size = (float)((float)(lemin->total_ants + way->total_size)
 				/ (float)way->nb_links);
-		if (better_size == 0 || cur_size <= better_size)
+		if (better_size == 0 || cur_size <= better_size || way->size == 1)
 		{
 			lemin->nb_ways = way->nb_links;
 			lemin->size = (size_t)cur_size;
+			if (way->size == 1)
+				lemin->oneshot = TRUE;
 			better_size = cur_size;
 			lemin->way_list = way->link;
 		}
