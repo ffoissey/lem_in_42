@@ -28,6 +28,8 @@ int8_t		parser(t_lemin *lemin)
 			lemin->error = READ_ERR; 
 		else
 			break ;
+		if (ft_putendl(line) == FAILURE)
+			lemin->error = WRITE_ERR;
 		ft_strdel(&line);
 	}
 	ft_strdel(&line);

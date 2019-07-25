@@ -56,7 +56,7 @@ int8_t		get_links(t_lemin *lemin, char *line)
 	char	*room_name2;
 	char	*hyphen;
 
-	if (is_comment(lemin, line) & COMMENT)
+	if (is_comment(line) & COMMENT)
 		return (SUCCESS);
 	if (line == NULL || *line == '\0'
 			|| (hyphen = ft_strchr(line, '-')) == NULL)

@@ -177,6 +177,7 @@ void	ants_divison(t_lemin *lemin);
 */
 
 void	exit_routine(t_lemin *lemin);
+void	free_ant(void *content);
 void	free_links_list(t_list *lst);
 
 /*
@@ -196,7 +197,6 @@ void		mark_way(t_list *lst, uint8_t mark);
 uint8_t		is_way_free(t_list *lst);
 size_t		get_nb_max_ways(t_lemin *lemin);
 int8_t      creat_ants_list(t_lemin *lemin);
-void        free_ant(void *content);
 
 /*
 **********************
@@ -218,7 +218,7 @@ int8_t		get_links(t_lemin *lemin, char *line);
 **** Parser Tools
 */
 
-uint8_t		is_comment(t_lemin *lemin, char *line);
+uint8_t		is_comment(char *line);
 uint8_t		is_correct_numeric_format(char *line);
 
 
