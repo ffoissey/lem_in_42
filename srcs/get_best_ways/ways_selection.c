@@ -38,10 +38,10 @@ static void		get_better_ways_set(t_lemin *lemin)
 		{
 			lemin->nb_ways = way->nb_links;
 			lemin->size = (size_t)cur_size;
-			if (is_oneshot(lemin, way) == TRUE)
-				return ;
 			better_size = cur_size;
 			lemin->way_list = way->link;
+			if (is_oneshot(lemin, way) == TRUE)
+				return ;
 		}
 		way_list = way_list->next;
 	}

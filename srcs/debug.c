@@ -46,15 +46,14 @@ void	print_room_list(t_list *run, t_lemin *lemin)
 
 void	print_graph(t_lemin *lemin)
 {
-	ft_printf("\033[33m\n####### DEBUG MODE ######\033[0m\n\n");
+	ft_printf("\033[33m\n###### GRAPH DEBUG ######\033[0m\n\n");
 	ft_printf("------ START | END ------\n\n");
 	ft_printf("Start: \033[36m%s\033[0m | End: \033[36m%s\033[0m\n\n",
 				lemin->start_room->name, lemin->end_room->name);
 	print_room_list(lemin->main_list_room, lemin);
 	ft_printf("Total ants: \033[36m%d\033[0m\n", (int)lemin->total_ants);
 	ft_printf("Max ways: \033[36m%d\033[0m\n", (int)lemin->nb_max_ways);
-	ft_printf("\033[33m\n#########################\033[0m\n");
-	ft_printf("\nStarting graph_course...\n\n");
+	ft_printf("\033[33m\n#########################\033[0m\n\n");
 }
 
 static void	print_way(t_way *way)
@@ -77,6 +76,7 @@ void	print_list_ways(t_lemin *lemin)
 	t_way	*way;
 	t_list	*lst;
 
+	ft_printf("\033[33m\n####### WAYS DEBUG ######\033[0m\n\n");
 	lst = lemin->way_list;
 	while (lst != NULL)
 	{
@@ -88,4 +88,5 @@ void	print_list_ways(t_lemin *lemin)
 				(int)lemin->nb_ways);
 	ft_printf("count ways: %d\n", (int)lemin->nb_ways);
 	ft_printf("nb ants: %d\n", (int)lemin->total_ants);
+	ft_printf("\033[33m\n#########################\033[0m\n\n");
 }

@@ -44,6 +44,18 @@
 
 /*
 *****************
+**** OPTION *****
+*****************
+*/
+
+# define COUNT_OPT			0x01
+# define NOMAP_OPT			0x02
+# define ONLYCOM_OPT		0x04
+# define GRAPH_OPT			0x08
+# define WAYS_OPT			0x10
+
+/*
+*****************
 ***** ERROR *****
 *****************
 */
@@ -155,6 +167,7 @@ typedef struct		s_lemin
 	uint32_t		error;
 	enum e_state	state;
 	uint8_t			oneshot;
+	uint8_t			option;
 }					t_lemin;			
 
 typedef int8_t	(*t_parsing)(t_lemin *, char *);

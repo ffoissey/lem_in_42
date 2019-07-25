@@ -61,7 +61,7 @@ static void		links_error(uint32_t error)
 
 void			print_error(uint32_t error)
 {
-	ft_putstr_fd("Error: ", 2);
+	ft_putstr_fd("lem-in: error: ", 2);
 	if (error & READ_ERR)
 		perror("read");
 	else if (error & MALLOC_ERR)

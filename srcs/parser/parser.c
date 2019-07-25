@@ -12,6 +12,23 @@
 
 #include "lemin.h"
 
+static void	print_line(t_lemin *lemin, char *line)
+{
+	if ((lemin->option & NOMAP_OPT) == FALSE)
+	{
+		if (lemin->option & ONLYCOM_OPT)
+		{
+			if (line != NULL && *line == '#' && *(line + 1) != '#')
+			{
+				if (ft_putendl(line) == FAILURE)
+					lemin->error = WRITE_ERR;
+			}
+		}
+		else if (ft_putendl(line) == FAILURE)
+			lemin->error = WRITE_ERR;
+	}
+}
+
 int8_t		parser(t_lemin *lemin)
 {
 	static t_parsing	parsing[] = {get_ants, get_rooms, get_links};
@@ -28,8 +45,7 @@ int8_t		parser(t_lemin *lemin)
 			lemin->error = READ_ERR; 
 		else
 			break ;
-		if (ft_putendl(line) == FAILURE)
-			lemin->error = WRITE_ERR;
+		print_line(lemin, line);
 		ft_strdel(&line);
 	}
 	ft_strdel(&line);

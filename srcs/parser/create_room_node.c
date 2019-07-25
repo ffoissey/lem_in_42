@@ -36,6 +36,7 @@ int8_t		get_start_and_end(t_lemin *lemin, t_room *room, uint8_t cmd)
 		if (lemin->start_room != NULL)
 		{
 			lemin->error = ROOMS_ERR | START_ROOM;
+			ft_strdel(&room->name);
 			return (FAILURE);
 		}
 		lemin->start_room = room;
@@ -45,6 +46,7 @@ int8_t		get_start_and_end(t_lemin *lemin, t_room *room, uint8_t cmd)
 		if (lemin->end_room != NULL)
 		{
 			lemin->error = ROOMS_ERR | END_ROOM;
+			ft_strdel(&room->name);
 			return (FAILURE);
 		}
 		lemin->end_room = room;
@@ -59,11 +61,15 @@ int8_t		create_room_node(t_lemin *lemin, t_room *room, uint8_t cmd)
 	t_list	*new_node;
 
 	if (room_control(lemin, room) == FAILURE)
+	{
+		ft_strdel(&room->name);
 		return (FAILURE);
+	}
 	new_node = ft_lstnew(room, sizeof(t_room));
 	if (new_node == NULL)
 	{
 		lemin->error = MALLOC_ERR;
+		ft_strdel(&room->name);
 		return (FAILURE);
 	}
 	ft_lstadd(&lemin->main_list_room, new_node);
