@@ -154,6 +154,7 @@ typedef struct		s_lemin
 	size_t			size;
 	uint32_t		error;
 	enum e_state	state;
+	uint8_t			oneshot;
 }					t_lemin;			
 
 typedef int8_t	(*t_parsing)(t_lemin *, char *);

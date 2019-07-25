@@ -19,7 +19,7 @@ static int8_t		get_best_way_set(t_lemin *lemin)
 	graph_course(lemin);
 	if (ways_selection(lemin) == FAILURE)
 		return (FAILURE);
-	print_list_ways(lemin); /// WAY LIST DEBUG
+//	print_list_ways(lemin); /// WAY LIST DEBUG
 	return (SUCCESS);
 }
 
