@@ -26,7 +26,6 @@ static int8_t		get_best_way_set(t_lemin *lemin)
 int					main(void)
 {
 	t_lemin lemin;
-	char	*result;
 
 	ft_bzero(&lemin, sizeof(lemin));
 	if (parser(&lemin) == FAILURE)
@@ -37,10 +36,11 @@ int					main(void)
 	}
 	if (get_best_way_set(&lemin) == FAILURE)
 	{
+		ft_putendl_fd("No way is possible", 2);
 		exit_routine(&lemin);
 		return (EXIT_FAILURE);
 	}
-	result = NULL;
 	complete_result(&lemin);
+	exit_routine(&lemin);
 	return (EXIT_SUCCESS);
 }

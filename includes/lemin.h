@@ -177,6 +177,7 @@ void	ants_divison(t_lemin *lemin);
 */
 
 void	exit_routine(t_lemin *lemin);
+void	free_links_list(t_list *lst);
 
 /*
 **** Error Management

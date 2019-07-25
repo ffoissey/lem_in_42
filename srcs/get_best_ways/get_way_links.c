@@ -67,6 +67,7 @@ static void			create_way_link(t_way *way, t_list *way_list,
 	way_node = ft_lstnew_nomalloc(way, sizeof(t_way *));
 	ft_lstadd(&(way->link), way_node);
 	mark_way(way->list, UNMARK);
+	ft_lst_mergesort(&(way->link), sort_by_size);
 }
 
 void				get_way_links(t_lemin *lemin)

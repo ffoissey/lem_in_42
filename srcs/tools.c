@@ -55,22 +55,24 @@ static uint8_t	is_same_way(t_way *cur_way, t_way *ref_way)
 
 static void	erase_same_way(t_list *way_list)
 {
-	t_way	*cur_way;
 	t_way	*ref_way;
+	t_list	*tmp;
 	t_list	*previous;
 
 	ref_way = (t_way *)way_list->content;
 	previous = way_list;
 	way_list = way_list->next;
-	while (way_list != NULL)
+	while (way_list != NULL
+			&& ((t_way *)(way_list->content))->size <= ref_way->size)
 	{
-		cur_way = (t_way *)way_list->content;
-		if (cur_way->size > ref_way->size)
-			return ;
-		if (is_same_way(cur_way, ref_way) == TRUE)
+		if (is_same_way((t_way *)way_list->content, ref_way) == TRUE)
 		{
-			//// FREE CUR_WAY
+			tmp = way_list;
 			previous->next = way_list->next;	
+			free_links_list(((t_way *)(tmp->content))->list);
+			((t_way *)(tmp->content))->list = NULL;
+			free(tmp->content);
+			free(tmp);
 			way_list = previous->next;
 		}
 		else
