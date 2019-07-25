@@ -54,13 +54,13 @@ static void        print_move(t_lemin *lemin)
         {
             ft_printf("L%zu-%s", cur_ant->id, cur_ant->position->name);
             if (ants_list->next != NULL)
-                ft_printf(" ");
+                ft_putchar(' ');
         }
         ants_list = ants_list->next;
         if (cur_ant->position == lemin->end_room)
             ft_lstdelnode(&lemin->ants, cur_ant, &free_ant);
     }
-    ft_printf("\n");
+    ft_putchar('\n');
 }
 
 static void     move_ants(t_lemin *lemin)

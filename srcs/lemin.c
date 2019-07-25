@@ -12,15 +12,6 @@
 
 #include "lemin.h"
 
-// static uint8_t		is_completed(t_lemin *lemin)
-// {
-// 	if (lemin->end_room == NULL)
-// 		return (FALSE);
-// 	if (lemin->end_room->ants == lemin->total_ants)
-// 		return (TRUE);
-// 	return (FALSE);
-// }
-
 static int8_t		get_best_way_set(t_lemin *lemin)
 {
 	set_distance(lemin);
@@ -51,12 +42,5 @@ int					main(void)
 	}
 	result = NULL;
 	complete_result(&lemin);
-	// while (is_completed(&lemin) == FALSE)
-	// {
-	// 	//result = process(lemin->start_room, lemin->turn);
-	// 	ft_putendl(result);
-	// 	ft_strdel(&result);
-	// }
-	//exit_routine(&lemin);
 	return (EXIT_SUCCESS);
 }

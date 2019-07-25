@@ -21,21 +21,21 @@ void              ants_divison(t_lemin *lemin)
 {
     t_list  *ways_list;
     t_way   *cur_way;
-    int     total_ants;
-    int     nb;
+    int		total_ants;
+    int		nb;
 
     ways_list = lemin->way_list;
     total_ants = lemin->total_ants;
     while (ways_list != NULL && lemin->total_ants != 0)
     {
         cur_way = (t_way *)ways_list->content;
-        nb = lemin->size - cur_way->size;
+        nb = (int)lemin->size - (int)cur_way->size;
         if (nb == 0)
             nb = 1;
         if (total_ants - nb < 0)
             nb = total_ants;
-        cur_way->ants = nb;
-        total_ants -= cur_way->ants;
+        cur_way->ants = (size_t)nb;
+        total_ants -= (int)cur_way->ants;
         ways_list = ways_list->next;
     }
     if (total_ants != 0)
