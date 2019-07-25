@@ -61,7 +61,8 @@ static void			create_way_link(t_way *way, t_list *way_list,
 		if (way->nb_links == lemin->total_ants)
 			break ;
 		cur_way = (t_way *)way_list->content;
-		better_size = match_try(lemin, way, cur_way, better_size);
+		if (cur_way != way)
+			better_size = match_try(lemin, way, cur_way, better_size);
 		way_list = way_list->next;
 	}
 	way_node = ft_lstnew_nomalloc(way, sizeof(t_way *));
