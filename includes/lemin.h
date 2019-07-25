@@ -115,14 +115,9 @@ typedef struct		s_way
 	size_t			size;
 	size_t			total_size;
 	size_t			nb_links;
+	size_t			ants;
 	uint8_t			id;
 }					t_way;
-
-typedef struct		s_ant
-{
-	t_list			*position;
-	size_t			id;
-}					t_ant;
 
 typedef struct		s_room
 {
@@ -138,6 +133,12 @@ typedef struct		s_room
 	uint8_t			mark;
 }					t_room;
 
+typedef struct		s_ant
+{
+	t_room			*position;
+	size_t			id;
+}					t_ant;
+
 typedef struct		s_lemin
 {
 	t_list			*main_list_room;
@@ -145,6 +146,7 @@ typedef struct		s_lemin
 	t_room			*end_room;
 	t_list			*possible_way_list;
 	t_list			*way_list;
+	t_list			*ants;
 	size_t			nb_ways;
 	size_t			nb_max_ways;
 	size_t			total_ants;
@@ -167,6 +169,8 @@ int8_t	save_the_way(t_lemin *lemin);
 int8_t	graph_course(t_lemin *lemin);
 int8_t	ways_selection(t_lemin *lemin);
 void	set_distance(t_lemin *lemin);
+int8_t  complete_result(t_lemin *lemin);
+void	ants_divison(t_lemin *lemin);
 
 /*
 **** Exit / Free
@@ -190,6 +194,8 @@ void		delete_duplicate_ways(t_lemin *lemin);
 void		mark_way(t_list *lst, uint8_t mark);
 uint8_t		is_way_free(t_list *lst);
 size_t		get_nb_max_ways(t_lemin *lemin);
+int8_t      creat_ants_list(t_lemin *lemin);
+void        free_ant(void *content);
 
 /*
 **********************

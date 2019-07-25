@@ -117,6 +117,7 @@ HEADER += lemin.h
 PATH_SRCS += srcs
 PATH_SRCS += srcs/parser
 PATH_SRCS += srcs/get_best_ways
+PATH_SRCS += srcs/complete_result
 
 ################################################################################
 #################################               ################################
@@ -128,6 +129,11 @@ SRCS += lemin.c
 SRCS += error.c
 SRCS += exit_routine.c
 SRCS += tools.c
+
+# Complete Result
+SRCS += ants_division.c
+SRCS += ants_list_tool.c
+SRCS += complete_result.c
 
 # Get Best Ways
 SRCS += set_distance.c
