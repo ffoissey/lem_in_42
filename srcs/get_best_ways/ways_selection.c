@@ -12,6 +12,13 @@ int				sort_by_size(void *content1, void *content2)
 	return (way1->size < way2->size);
 }
 
+static uint8_t	is_oneshot(t_lemin *lemin, t_way *way)
+{
+	if (way->size == 1)
+		lemin->oneshot = TRUE;
+	return (lemin->oneshot);
+}
+
 static void		get_better_ways_set(t_lemin *lemin)
 {
 	t_list	*way_list;
@@ -31,8 +38,8 @@ static void		get_better_ways_set(t_lemin *lemin)
 		{
 			lemin->nb_ways = way->nb_links;
 			lemin->size = (size_t)cur_size;
-			if (way->size == 1)
-				lemin->oneshot = TRUE;
+			if (is_oneshot(lemin, way) == TRUE)
+				return ;
 			better_size = cur_size;
 			lemin->way_list = way->link;
 		}

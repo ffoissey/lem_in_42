@@ -1,6 +1,6 @@
 #include "lemin.h"
 
-void	free_links_list(t_list *lst)
+void		free_links_list(t_list *lst)
 {
 	if (lst == NULL)
 		return ;
@@ -8,14 +8,14 @@ void	free_links_list(t_list *lst)
 	free(lst);
 }
 
-void	free_room(t_room *room)
+static void	free_room(t_room *room)
 {
 	ft_strdel(&room->name);
 	free_links_list(room->links);
 	free(room);
 }
 
-void	free_main_list_room(t_list *lst)
+static void	free_main_list_room(t_list *lst)
 {
 	if (lst == NULL)
 		return ;
@@ -25,7 +25,7 @@ void	free_main_list_room(t_list *lst)
 }
 
 
-void	free_way_list(t_list *lst)
+static void	free_way_list(t_list *lst)
 {
 	if (lst != NULL)
 	{
@@ -41,7 +41,7 @@ void	free_way_list(t_list *lst)
 	}
 }
 
-void	exit_routine(t_lemin *lemin)
+void		exit_routine(t_lemin *lemin)
 {
 	free_way_list(lemin->possible_way_list);
 	free_main_list_room(lemin->main_list_room);
