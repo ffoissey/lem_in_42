@@ -75,7 +75,7 @@ int8_t		get_rooms(t_lemin *lemin, char *line)
 	static uint8_t	cmd = FALSE;
 	t_room			room;
 
-	if ((comment = is_comment(lemin, line)) & COMMENT)
+	if ((comment = is_comment(line)) & COMMENT)
 		return (SUCCESS);
 	if (cmd == FALSE && (cmd = is_valid_cmd(comment)))
 		return (SUCCESS);

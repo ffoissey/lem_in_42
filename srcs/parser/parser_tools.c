@@ -1,6 +1,6 @@
 #include "lemin.h"
 
-uint8_t			is_comment(t_lemin *lemin, char *line)
+uint8_t			is_comment(char *line)
 {
 	uint8_t	comment;
 
@@ -14,8 +14,6 @@ uint8_t			is_comment(t_lemin *lemin, char *line)
 		comment = END_CMD;
 	else
 		comment = UNKNOW_CMD | COMMENT;
-	if (ft_putendl(line + (comment == COMMENT ? 1 : 2)) == FAILURE)
-		lemin->error = WRITE_ERR;
 	return (comment);
 }
 

@@ -14,7 +14,7 @@
 
 int8_t			get_ants(t_lemin *lemin, char *line)
 {
-	if (is_comment(lemin, line) & COMMENT)
+	if (is_comment(line) & COMMENT)
 		return (SUCCESS);
 	if (is_correct_numeric_format(line) == FALSE)
 	{
