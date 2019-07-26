@@ -6,7 +6,7 @@
 /*   By: tpillot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/26 10:08:11 by tpillot           #+#    #+#             */
-/*   Updated: 2019/07/26 10:19:28 by ffoissey         ###   ########.fr       */
+/*   Updated: 2019/07/26 10:22:42 by ffoissey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,10 +105,10 @@ static void		move_ants(t_lemin *lemin)
 
 int8_t			complete_result(t_lemin *lemin)
 {
-    if (create_ants_list(lemin) == FAILURE)
-        return (FAILURE);
-    ants_divison(lemin);
-    while (lemin->ants != NULL)
-        move_ants(lemin);
-    return (SUCCESS);
+	if (create_ants_list(lemin) == FAILURE)
+		return (FAILURE);
+	ants_divison(lemin);
+	while (lemin->ants != NULL)
+		move_ants(lemin);
+	return (SUCCESS);
 }

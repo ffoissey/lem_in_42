@@ -6,13 +6,13 @@
 /*   By: tpillot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/26 10:06:01 by tpillot           #+#    #+#             */
-/*   Updated: 2019/07/26 10:19:50 by ffoissey         ###   ########.fr       */
+/*   Updated: 2019/07/26 10:21:53 by ffoissey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lemin.h"
 
-int8_t        create_ants_list(t_lemin *lemin)
+int8_t		create_ants_list(t_lemin *lemin)
 {
 	size_t	id;
 	t_ant	ant;
