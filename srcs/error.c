@@ -1,17 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   error.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ffoissey <ffoisssey@student.42.fr>         +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/07/26 09:45:28 by ffoissey          #+#    #+#             */
+/*   Updated: 2019/07/26 09:47:12 by ffoissey         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "lemin.h"
 #include <errno.h>
 #include <stdio.h>
-
-uint8_t			is_major_error(uint32_t error)
-{
-	if ((unsigned char)(error >> 24))
-		return (TRUE);
-	else if (error & ANTS_ERR)
-		return (TRUE);
-	else if (error & ROOMS_ERR)
-		return (TRUE);
-	return (FALSE);
-}
 
 static void		ants_error(uint32_t error)
 {
@@ -24,7 +25,6 @@ static void		ants_error(uint32_t error)
 		ft_putendl_fd("Bad format", 2);
 	else
 		ft_putendl_fd("Undefined error", 2);
-
 }
 
 static void		rooms_error(uint32_t error)

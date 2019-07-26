@@ -6,7 +6,7 @@
 /*   By: ffoissey <ffoisssey@student.42.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/10 17:19:59 by ffoissey          #+#    #+#             */
-/*   Updated: 2019/07/23 18:43:33 by ffoissey         ###   ########.fr       */
+/*   Updated: 2019/07/26 09:54:30 by ffoissey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -134,7 +134,7 @@ typedef struct		s_way
 typedef struct		s_room
 {
 	t_list			*links;
-	struct	s_room	*current_link;
+	struct s_room	*current_link;
 	char			*name;
 	size_t			d_start;
 	size_t			d_end;
@@ -164,13 +164,14 @@ typedef struct		s_lemin
 	size_t			total_ants;
 	size_t			max_score;
 	size_t			size;
+	size_t			count;
 	uint32_t		error;
 	enum e_state	state;
 	uint8_t			oneshot;
 	uint8_t			option;
-}					t_lemin;			
+}					t_lemin;
 
-typedef int8_t	(*t_parsing)(t_lemin *, char *);
+typedef int8_t		(*t_parsing)(t_lemin *, char *);
 
 /*
 **********************
@@ -178,39 +179,38 @@ typedef int8_t	(*t_parsing)(t_lemin *, char *);
 **********************
 */
 
-void	get_way_links(t_lemin *lemin);
-int8_t	save_the_way(t_lemin *lemin);
-int8_t	graph_course(t_lemin *lemin);
-int8_t	ways_selection(t_lemin *lemin);
-void	set_distance(t_lemin *lemin);
-int8_t  complete_result(t_lemin *lemin);
-void	ants_divison(t_lemin *lemin);
+void				get_way_links(t_lemin *lemin);
+int8_t				save_the_way(t_lemin *lemin);
+int8_t				graph_course(t_lemin *lemin);
+int8_t				ways_selection(t_lemin *lemin);
+void				set_distance(t_lemin *lemin);
+int8_t				complete_result(t_lemin *lemin);
+void				ants_divison(t_lemin *lemin);
 
 /*
 **** Exit / Free
 */
 
-void	exit_routine(t_lemin *lemin);
-void	free_ant(void *content);
-void	free_links_list(t_list *lst);
+void				exit_routine(t_lemin *lemin);
+void				free_ant(void *content);
+void				free_links_list(t_list *lst);
 
 /*
 **** Error Management
 */
 
-uint8_t		is_major_error(uint32_t error);
-void		print_error(uint32_t error);
+void				print_error(uint32_t error);
 
 /*
 **** Tools
 */
 
-int			sort_by_size(void *content1, void *content2);
-void		delete_duplicate_ways(t_lemin *lemin);
-void		mark_way(t_list *lst, uint8_t mark);
-uint8_t		is_way_free(t_list *lst);
-size_t		get_nb_max_ways(t_lemin *lemin);
-int8_t      creat_ants_list(t_lemin *lemin);
+int					sort_by_size(void *content1, void *content2);
+void				delete_duplicate_ways(t_lemin *lemin);
+void				mark_way(t_list *lst, uint8_t mark);
+uint8_t				is_way_free(t_list *lst);
+size_t				get_nb_max_ways(t_lemin *lemin);
+int8_t				creat_ants_list(t_lemin *lemin);
 
 /*
 **********************
@@ -218,35 +218,34 @@ int8_t      creat_ants_list(t_lemin *lemin);
 **********************
 */
 
-int8_t		parser(t_lemin *lemin);
+int8_t				parser(t_lemin *lemin);
 
 /*
 **** State Machine
 */
 
-int8_t		get_ants(t_lemin *lemin, char *line);
-int8_t		get_rooms(t_lemin *lemin, char *line);
-int8_t		get_links(t_lemin *lemin, char *line);
+int8_t				get_ants(t_lemin *lemin, char *line);
+int8_t				get_rooms(t_lemin *lemin, char *line);
+int8_t				get_links(t_lemin *lemin, char *line);
 
 /*
 **** Parser Tools
 */
 
-uint8_t		is_comment(char *line);
-uint8_t		is_correct_numeric_format(char *line);
-
+uint8_t				is_comment(char *line);
+uint8_t				is_correct_numeric_format(char *line);
 
 /*
 **** Graph Tools
 */
 
-int8_t		create_room_node(t_lemin *lemin, t_room *room, uint8_t cmd);
+int8_t				create_room_node(t_lemin *lemin, t_room *room, uint8_t cmd);
 
 /*
 **** Debug
 */
 
-void	print_graph(t_lemin *lemin);
-void	print_list_ways(t_lemin *lemin);
+void				print_graph(t_lemin *lemin);
+void				print_list_ways(t_lemin *lemin);
 
 #endif

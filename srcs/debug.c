@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   debug.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ffoissey <ffoisssey@student.42.fr>         +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/07/26 09:47:42 by ffoissey          #+#    #+#             */
+/*   Updated: 2019/07/26 09:49:19 by ffoissey         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "lemin.h"
 
 static void	print_room_links(t_list *run)
@@ -15,7 +27,7 @@ static void	print_room_links(t_list *run)
 	ft_putchar('\n');
 }
 
-void	print_room_list(t_list *run, t_lemin *lemin)
+static void	print_room_list(t_list *run, t_lemin *lemin)
 {
 	t_room *room;
 
@@ -44,7 +56,7 @@ void	print_room_list(t_list *run, t_lemin *lemin)
 	}
 }
 
-void	print_graph(t_lemin *lemin)
+void		print_graph(t_lemin *lemin)
 {
 	ft_printf("\033[33m\n###### GRAPH DEBUG ######\033[0m\n\n");
 	ft_printf("------ START | END ------\n\n");
@@ -71,7 +83,7 @@ static void	print_way(t_way *way)
 	ft_printf("\nSIZE: %d\n", (int)way->size);
 }
 
-void	print_list_ways(t_lemin *lemin)
+void		print_list_ways(t_lemin *lemin)
 {
 	t_way	*way;
 	t_list	*lst;

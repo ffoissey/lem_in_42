@@ -60,6 +60,8 @@ static void        print_move(t_lemin *lemin)
         if (cur_ant->position == lemin->end_room)
             ft_lstdelnode(&lemin->ants, cur_ant, &free_ant);
     }
+	if (lemin->option & COUNT_OPT)
+		lemin->count++;
     ft_putchar('\n');
 }
 

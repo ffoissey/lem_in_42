@@ -6,7 +6,7 @@
 /*   By: ffoissey <ffoisssey@student.42.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/10 17:50:47 by ffoissey          #+#    #+#             */
-/*   Updated: 2019/07/23 17:57:53 by ffoissey         ###   ########.fr       */
+/*   Updated: 2019/07/26 09:55:41 by ffoissey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,8 @@ int					main(int ac, char **av)
 		return (EXIT_FAILURE);
 	}
 	complete_result(&lemin);
+	if (lemin.option & COUNT_OPT)
+		ft_printf("Count : %zu\n", lemin.count);
 	exit_routine(&lemin);
 	return (EXIT_SUCCESS);
 }
