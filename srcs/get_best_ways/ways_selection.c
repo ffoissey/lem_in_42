@@ -1,22 +1,77 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ways_selection.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ffoissey <ffoisssey@student.42.fr>         +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/07/26 10:06:09 by ffoissey          #+#    #+#             */
+/*   Updated: 2019/07/26 10:10:34 by ffoissey         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "lemin.h"
 
-int				sort_by_size(void *content1, void *content2)
+static uint8_t	is_same_way(t_way *cur_way, t_way *ref_way)
 {
-	t_way	*way1;
-	t_way	*way2;
+	t_list	*current;
+	t_list	*ref;
 
-	way1 = (t_way *)content1;
-	way2 = (t_way *)content2;
-	if (way1 == NULL || way2 == NULL)
-		return (0);
-	return (way1->size < way2->size);
+	current = cur_way->list;
+	ref = ref_way->list;
+	while (current != NULL && ref != NULL)
+	{
+		if (ref->content != current->content)
+			return (FALSE);
+		current = current->next;
+		ref = ref->next;
+	}
+	return (TRUE);
 }
 
-static uint8_t	is_oneshot(t_lemin *lemin, t_way *way)
+static void		erase_same_way(t_list *way_list)
 {
-	if (way->size == 1)
-		lemin->oneshot = TRUE;
-	return (lemin->oneshot);
+	t_way	*ref_way;
+	t_list	*tmp;
+	t_list	*previous;
+
+	ref_way = (t_way *)way_list->content;
+	previous = way_list;
+	way_list = way_list->next;
+	while (way_list && ((t_way *)(way_list->content))->size <= ref_way->size)
+	{
+		if (is_same_way((t_way *)way_list->content, ref_way) == TRUE)
+		{
+			tmp = way_list;
+			previous->next = way_list->next;	
+			free_links_list(((t_way *)(tmp->content))->list);
+			((t_way *)(tmp->content))->list = NULL;
+			free(tmp->content);
+			free(tmp);
+			way_list = previous->next;
+		}
+		else
+		{
+			previous = way_list;
+			way_list = way_list->next;
+		}
+	}
+}
+
+static void		delete_duplicate_ways(t_lemin *lemin)
+{
+	size_t	 i;
+	t_list	*way_list;
+
+	i = 0;
+	way_list = lemin->possible_way_list;
+	while (way_list != NULL && way_list->next != NULL)
+	{
+		erase_same_way(way_list);
+		way_list = way_list->next;
+		i++;
+	}
+	lemin->nb_ways = i + 1;
 }
 
 static void		get_better_ways_set(t_lemin *lemin)

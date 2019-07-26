@@ -6,7 +6,7 @@
 /*   By: ffoissey <ffoisssey@student.42.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/10 17:19:59 by ffoissey          #+#    #+#             */
-/*   Updated: 2019/07/26 09:54:30 by ffoissey         ###   ########.fr       */
+/*   Updated: 2019/07/26 10:10:30 by ffoissey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -179,12 +179,15 @@ typedef int8_t		(*t_parsing)(t_lemin *, char *);
 **********************
 */
 
-void				get_way_links(t_lemin *lemin);
-int8_t				save_the_way(t_lemin *lemin);
-int8_t				graph_course(t_lemin *lemin);
-int8_t				ways_selection(t_lemin *lemin);
 void				set_distance(t_lemin *lemin);
+int8_t				graph_course(t_lemin *lemin);
+int8_t				save_the_way(t_lemin *lemin);
+
+int8_t				ways_selection(t_lemin *lemin);
+void				get_way_links(t_lemin *lemin);
+
 int8_t				complete_result(t_lemin *lemin);
+int8_t				create_ants_list(t_lemin *lemin);
 void				ants_divison(t_lemin *lemin);
 
 /*
@@ -206,11 +209,10 @@ void				print_error(uint32_t error);
 */
 
 int					sort_by_size(void *content1, void *content2);
-void				delete_duplicate_ways(t_lemin *lemin);
+uint8_t				is_oneshot(t_lemin *lemin, t_way *way);
 void				mark_way(t_list *lst, uint8_t mark);
 uint8_t				is_way_free(t_list *lst);
 size_t				get_nb_max_ways(t_lemin *lemin);
-int8_t				creat_ants_list(t_lemin *lemin);
 
 /*
 **********************

@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   exit_routine.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ffoissey <ffoisssey@student.42.fr>         +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/07/26 10:11:40 by ffoissey          #+#    #+#             */
+/*   Updated: 2019/07/26 10:12:06 by ffoissey         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "lemin.h"
 
 void		free_links_list(t_list *lst)
@@ -23,7 +35,6 @@ static void	free_main_list_room(t_list *lst)
 	free_room((t_room *)lst->content);
 	free(lst);
 }
-
 
 static void	free_way_list(t_list *lst)
 {

@@ -1,6 +1,6 @@
 #include "lemin.h"
 
-int8_t        creat_ants_list(t_lemin *lemin)
+int8_t        create_ants_list(t_lemin *lemin)
 {
     size_t  id;
     t_ant   ant;

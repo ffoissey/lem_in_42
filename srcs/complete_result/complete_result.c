@@ -93,7 +93,7 @@ static void     move_ants(t_lemin *lemin)
 
 int8_t        complete_result(t_lemin *lemin)
 {
-    if (creat_ants_list(lemin) == FAILURE)
+    if (create_ants_list(lemin) == FAILURE)
         return (FAILURE);
     ants_divison(lemin);
     while (lemin->ants != NULL)
