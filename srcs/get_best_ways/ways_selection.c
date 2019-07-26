@@ -6,7 +6,7 @@
 /*   By: ffoissey <ffoisssey@student.42.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/26 10:06:09 by ffoissey          #+#    #+#             */
-/*   Updated: 2019/07/26 10:10:34 by ffoissey         ###   ########.fr       */
+/*   Updated: 2019/07/26 10:36:04 by ffoissey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ static void		erase_same_way(t_list *way_list)
 		if (is_same_way((t_way *)way_list->content, ref_way) == TRUE)
 		{
 			tmp = way_list;
-			previous->next = way_list->next;	
+			previous->next = way_list->next;
 			free_links_list(((t_way *)(tmp->content))->list);
 			((t_way *)(tmp->content))->list = NULL;
 			free(tmp->content);
@@ -60,7 +60,7 @@ static void		erase_same_way(t_list *way_list)
 
 static void		delete_duplicate_ways(t_lemin *lemin)
 {
-	size_t	 i;
+	size_t	i;
 	t_list	*way_list;
 
 	i = 0;

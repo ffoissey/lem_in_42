@@ -6,7 +6,7 @@
 /*   By: ffoissey <ffoisssey@student.42.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/16 14:39:51 by ffoissey          #+#    #+#             */
-/*   Updated: 2019/07/23 15:08:13 by ffoissey         ###   ########.fr       */
+/*   Updated: 2019/07/26 10:32:32 by ffoissey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ static uint8_t	is_better_distance(size_t *d_start, size_t *d_end, t_room *room,
 
 static t_room	*get_best_room(t_room *room, uint8_t opt)
 {
-	t_list *links;
+	t_list	*links;
 	t_room	*cur_room;
 	size_t	d_start;
 	size_t	d_end;
@@ -90,7 +90,7 @@ static int8_t	roll_back_to_end(t_room *room, t_lemin *lemin)
 int8_t			graph_course(t_lemin *lemin)
 {
 	t_list	*run;
-	t_room *cur_room;
+	t_room	*cur_room;
 
 	run = lemin->main_list_room;
 	while (run != NULL)
@@ -103,5 +103,5 @@ int8_t			graph_course(t_lemin *lemin)
 		}
 		run = run->next;
 	}
-	return (SUCCESS);	
+	return (SUCCESS);
 }

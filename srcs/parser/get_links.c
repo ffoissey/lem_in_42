@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   get_links.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ffoissey <ffoisssey@student.42.fr>         +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/07/26 10:26:00 by ffoissey          #+#    #+#             */
+/*   Updated: 2019/07/26 10:26:16 by ffoissey         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "lemin.h"
 
 static t_room	*get_room_adress(t_list *run, char *room_name)
@@ -50,7 +62,7 @@ static int8_t	do_links(t_lemin *lemin, char *room_name1, char *room_name2)
 	return (room_linker(lemin, room1, room2));
 }
 
-int8_t		get_links(t_lemin *lemin, char *line)
+int8_t			get_links(t_lemin *lemin, char *line)
 {
 	char	*room_name1;
 	char	*room_name2;

@@ -1,10 +1,22 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parser_tools.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ffoissey <ffoisssey@student.42.fr>         +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/07/26 10:27:52 by ffoissey          #+#    #+#             */
+/*   Updated: 2019/07/26 10:27:56 by ffoissey         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "lemin.h"
 
 uint8_t			is_comment(char *line)
 {
 	uint8_t	comment;
 
-	if (line == NULL || *line != '#') 
+	if (line == NULL || *line != '#')
 		return (NO_COMMENT);
 	if (ft_strnequ(line, "##", 2) == FALSE)
 		comment = COMMENT;

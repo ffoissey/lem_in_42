@@ -6,7 +6,7 @@
 /*   By: tpillot <tpillot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/26 10:17:34 by tpillot           #+#    #+#             */
-/*   Updated: 2019/07/26 10:17:36 by tpillot          ###   ########.fr       */
+/*   Updated: 2019/07/26 10:36:57 by ffoissey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -141,12 +141,9 @@ void		move_ants(t_lemin *lemin)
 
 void		completed_result(t_lemin *lemin)
 {
-	creat_ants_list(lemin);
+	create_ants_list(lemin);
 	if (ants_divison(lemin) == FAILURE)
 		return (FAILURE);
 	while (lemin->ants != NULL)
 		move_ants(lemin);
 }
-
-
-

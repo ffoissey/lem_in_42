@@ -1,3 +1,14 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   create_room_node.c                                 :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ffoissey <ffoisssey@student.42.fr>         +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/07/26 10:25:36 by ffoissey          #+#    #+#             */
+/*   Updated: 2019/07/26 10:26:25 by ffoissey         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "lemin.h"
 
@@ -53,8 +64,6 @@ int8_t		get_start_and_end(t_lemin *lemin, t_room *room, uint8_t cmd)
 	}
 	return (SUCCESS);
 }
-
-/////////// Hashmap maybe ? 
 
 int8_t		create_room_node(t_lemin *lemin, t_room *room, uint8_t cmd)
 {

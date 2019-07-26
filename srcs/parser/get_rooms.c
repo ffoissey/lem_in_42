@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   get_rooms.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ffoissey <ffoisssey@student.42.fr>         +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/07/26 10:26:31 by ffoissey          #+#    #+#             */
+/*   Updated: 2019/07/26 10:27:43 by ffoissey         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "lemin.h"
 
-static uint8_t is_valid_cmd(uint8_t comment)
+static uint8_t	is_valid_cmd(uint8_t comment)
 {
 	if (comment == START_CMD || comment == END_CMD)
 		return (comment);
@@ -15,7 +27,7 @@ static char		*get_room_name(t_lemin *lemin, char *line)
 	if (line == NULL || *line == '\0')
 		lemin->error = ROOMS_ERR | BAD_FORMAT;
 	else if (*line == 'L')
-		lemin->error = ROOMS_ERR | BAD_START_LETTER;	
+		lemin->error = ROOMS_ERR | BAD_START_LETTER;
 	else if ((name = ft_strcdup(line, ' ')) == NULL)
 		lemin->error = MALLOC_ERR;
 	return (name);
@@ -43,16 +55,16 @@ static	size_t	get_room_coord(t_lemin *lemin, char **line)
 		lemin->error = ROOMS_ERR | BAD_FORMAT;
 	*line += ft_strlen(coord_str);
 	coord = ft_atol(coord_str);
-	if (coord > INT_MAX || ft_strlen(coord_str) > 10) 
+	if (coord > INT_MAX || ft_strlen(coord_str) > 10)
 		lemin->error = ROOMS_ERR | INVALID_COORD;
 	ft_strdel(&coord_str);
 	return (coord);
 }
 
-static	int8_t	room_acquisition(t_lemin *lemin, char *line, t_room *room)
+static int8_t	room_acquisition(t_lemin *lemin, char *line, t_room *room)
 {
 	ft_bzero(room, sizeof(t_room));
-	room->mark = UNMARK; 
+	room->mark = UNMARK;
 	room->name = get_room_name(lemin, line);
 	if (lemin->error)
 		return (FAILURE);
@@ -69,7 +81,7 @@ static	int8_t	room_acquisition(t_lemin *lemin, char *line, t_room *room)
 	return (SUCCESS);
 }
 
-int8_t		get_rooms(t_lemin *lemin, char *line)
+int8_t			get_rooms(t_lemin *lemin, char *line)
 {
 	uint8_t			comment;
 	static uint8_t	cmd = FALSE;
