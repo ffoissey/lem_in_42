@@ -6,7 +6,7 @@
 /*   By: tpillot <tpillot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/26 10:25:55 by tpillot           #+#    #+#             */
-/*   Updated: 2019/07/26 10:26:01 by tpillot          ###   ########.fr       */
+/*   Updated: 2019/07/26 10:47:13 by ffoissey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,12 +20,15 @@ static void		put_rest(t_list *ways_list, int rest)
 	first_way = ways_list;
 	while (rest != 0)
 	{
-		cur_way = (t_way *)ways_list->content;
-		cur_way->ants++;
-		rest--;
-		ways_list = ways_list->next;
-		if (ways_list == NULL)
-			ways_list = first_way;
+		if (ways_list != NULL)
+		{
+			cur_way = (t_way *)ways_list->content;
+			cur_way->ants++;
+			rest--;
+			ways_list = ways_list->next;
+			if (ways_list == NULL)
+				ways_list = first_way;
+		}
 	}
 }
 

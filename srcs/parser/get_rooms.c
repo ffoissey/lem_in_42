@@ -6,7 +6,7 @@
 /*   By: ffoissey <ffoisssey@student.42.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/26 10:26:31 by ffoissey          #+#    #+#             */
-/*   Updated: 2019/07/26 10:27:43 by ffoissey         ###   ########.fr       */
+/*   Updated: 2019/07/26 10:47:36 by ffoissey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,6 @@ static	size_t	get_room_coord(t_lemin *lemin, char **line)
 	char	*coord_str;
 	size_t	coord;
 
-	coord = 0;
 	if (*line == NULL || **line == '\0')
 	{
 		lemin->error = ROOMS_ERR | BAD_FORMAT;
