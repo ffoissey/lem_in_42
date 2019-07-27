@@ -6,7 +6,7 @@
 /*   By: tpillot <tpillot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/26 10:25:08 by tpillot           #+#    #+#             */
-/*   Updated: 2019/07/26 10:25:18 by tpillot          ###   ########.fr       */
+/*   Updated: 2019/07/27 13:09:52 by ffoissey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,6 +108,7 @@ int8_t			complete_result(t_lemin *lemin)
 	if (create_ants_list(lemin) == FAILURE)
 		return (FAILURE);
 	ants_divison(lemin);
+	ft_putchar('\n');
 	while (lemin->ants != NULL)
 		move_ants(lemin);
 	return (SUCCESS);

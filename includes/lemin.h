@@ -6,7 +6,7 @@
 /*   By: ffoissey <ffoisssey@student.42.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/10 17:19:59 by ffoissey          #+#    #+#             */
-/*   Updated: 2019/07/26 10:10:30 by ffoissey         ###   ########.fr       */
+/*   Updated: 2019/07/27 13:04:10 by ffoissey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -169,6 +169,7 @@ typedef struct		s_lemin
 	enum e_state	state;
 	uint8_t			oneshot;
 	uint8_t			option;
+	uint8_t			links_validation;
 }					t_lemin;
 
 typedef int8_t		(*t_parsing)(t_lemin *, char *);

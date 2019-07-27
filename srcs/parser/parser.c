@@ -6,7 +6,7 @@
 /*   By: ffoissey <ffoisssey@student.42.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/12 11:08:43 by ffoissey          #+#    #+#             */
-/*   Updated: 2019/07/26 10:30:49 by ffoissey         ###   ########.fr       */
+/*   Updated: 2019/07/27 13:11:30 by ffoissey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,10 @@ int8_t		parser(t_lemin *lemin)
 	}
 	ft_strdel(&line);
 	get_next_line(CLEANUP, NULL);
+	if (lemin->links_validation == FALSE)
+		lemin->error = LINKS_ERR | BAD_FORMAT;
 	if (lemin->main_list_room == NULL && lemin->error == NO_ERR)
 		lemin->error = FILE_ERR;
-	return (lemin->error == NO_ERR ? SUCCESS : FAILURE);
+	return (lemin->error == NO_ERR || (lemin->links_validation == TRUE
+				&& (lemin->error & LINKS_ERR)) ? SUCCESS : FAILURE);
 }

@@ -6,7 +6,7 @@
 /*   By: ffoissey <ffoisssey@student.42.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/26 10:26:00 by ffoissey          #+#    #+#             */
-/*   Updated: 2019/07/26 10:26:16 by ffoissey         ###   ########.fr       */
+/*   Updated: 2019/07/27 13:09:57 by ffoissey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,5 +84,6 @@ int8_t			get_links(t_lemin *lemin, char *line)
 		do_links(lemin, room_name1, room_name2);
 	ft_strdel(&room_name1);
 	ft_strdel(&room_name2);
+	lemin->links_validation = TRUE;
 	return (lemin->error ? FAILURE : SUCCESS);
 }
