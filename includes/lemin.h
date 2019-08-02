@@ -6,7 +6,7 @@
 /*   By: ffoissey <ffoisssey@student.42.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/10 17:19:59 by ffoissey          #+#    #+#             */
-/*   Updated: 2019/07/27 13:04:10 by ffoissey         ###   ########.fr       */
+/*   Updated: 2019/08/02 11:44:43 by ffoissey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -153,6 +153,7 @@ typedef struct		s_ant
 
 typedef struct		s_lemin
 {
+	t_list			*map;
 	t_list			*main_list_room;
 	t_room			*start_room;
 	t_room			*end_room;

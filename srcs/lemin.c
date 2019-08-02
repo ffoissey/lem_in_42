@@ -6,7 +6,7 @@
 /*   By: ffoissey <ffoisssey@student.42.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/10 17:50:47 by ffoissey          #+#    #+#             */
-/*   Updated: 2019/07/26 09:55:41 by ffoissey         ###   ########.fr       */
+/*   Updated: 2019/08/02 12:11:32 by ffoissey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,9 +52,43 @@ static int8_t		parse_arg(t_lemin *lemin, char **arg)
 	return (SUCCESS);
 }
 
+static void	print_line(t_lemin *lemin, char *line)
+{
+	if ((lemin->option & NOMAP_OPT) == FALSE)
+	{
+		if (lemin->option & ONLYCOM_OPT)
+		{
+			if (line != NULL && *line == '#' && *(line + 1) != '#')
+			{
+				if (ft_putendl(line) == FAILURE)
+					lemin->error = WRITE_ERR;
+			}
+		}
+		else if (ft_putendl(line) == FAILURE)
+			lemin->error = WRITE_ERR;
+	}
+}
+
+static void		print_map(t_lemin *lemin, t_list *map, size_t *err)
+{
+	if (map != NULL)
+	{
+		print_map(lemin, map->next, err);
+		if ((lemin->error & WRITE_ERR) == FALSE)
+			print_line(lemin, (char *)map->content);
+		else if (*err == FALSE && (lemin->error & WRITE_ERR))
+		{
+			(*err)++;
+			ft_putstr_fd("lemin: error: ", 2);
+			perror("write");
+		}
+	}
+}
+
 int					main(int ac, char **av)
 {
 	t_lemin lemin;
+	size_t	err;
 
 	(void)ac;
 	ft_bzero(&lemin, sizeof(lemin));
@@ -72,6 +106,8 @@ int					main(int ac, char **av)
 		exit_routine(&lemin);
 		return (EXIT_FAILURE);
 	}
+	err = 0;
+	print_map(&lemin, lemin.map, &err);
 	complete_result(&lemin);
 	if (lemin.option & COUNT_OPT)
 		ft_printf("Count : %zu\n", lemin.count);

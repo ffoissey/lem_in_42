@@ -6,7 +6,7 @@
 /*   By: ffoissey <ffoisssey@student.42.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/26 10:11:40 by ffoissey          #+#    #+#             */
-/*   Updated: 2019/07/26 10:12:06 by ffoissey         ###   ########.fr       */
+/*   Updated: 2019/08/02 12:15:24 by ffoissey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,19 +20,23 @@ void		free_links_list(t_list *lst)
 	free(lst);
 }
 
-static void	free_room(t_room *room)
+void	free_room(void *content)
 {
+	t_room *room;
+	
+	room = (t_room *)content;
 	ft_strdel(&room->name);
 	free_links_list(room->links);
-	free(room);
 }
 
-static void	free_main_list_room(t_list *lst)
+static void	free_list(t_list *lst, void (*f)(void *))
 {
 	if (lst == NULL)
 		return ;
-	free_main_list_room(lst->next);
-	free_room((t_room *)lst->content);
+	free_list(lst->next, f);
+	if (f != NULL)
+		f(lst->content);
+	free(lst->content);
 	free(lst);
 }
 
@@ -54,6 +58,7 @@ static void	free_way_list(t_list *lst)
 
 void		exit_routine(t_lemin *lemin)
 {
+	free_list(lemin->map, NULL);
 	free_way_list(lemin->possible_way_list);
-	free_main_list_room(lemin->main_list_room);
+	free_list(lemin->main_list_room, free_room);
 }
