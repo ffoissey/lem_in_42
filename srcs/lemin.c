@@ -6,7 +6,7 @@
 /*   By: ffoissey <ffoisssey@student.42.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/10 17:50:47 by ffoissey          #+#    #+#             */
-/*   Updated: 2019/08/02 12:11:32 by ffoissey         ###   ########.fr       */
+/*   Updated: 2019/09/03 14:05:57 by ffoissey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,8 @@ static int8_t		parse_arg(t_lemin *lemin, char **arg)
 			lemin->option |= GRAPH_OPT;
 		else if (ft_strequ(*arg, "--ways") == TRUE)
 			lemin->option |= WAYS_OPT;
+		else if (ft_strequ(*arg, "--verbose") == TRUE)
+			lemin->option |= V_OPT;
 		else
 		{
 			ft_dprintf(2, "lem-in: %s: Invalid option\n", *arg);
@@ -52,7 +54,7 @@ static int8_t		parse_arg(t_lemin *lemin, char **arg)
 	return (SUCCESS);
 }
 
-static void	print_line(t_lemin *lemin, char *line)
+static void			print_line(t_lemin *lemin, char *line)
 {
 	if ((lemin->option & NOMAP_OPT) == FALSE)
 	{
@@ -69,16 +71,18 @@ static void	print_line(t_lemin *lemin, char *line)
 	}
 }
 
-static void		print_map(t_lemin *lemin, t_list *map, size_t *err)
+static void			print_map(t_lemin *lemin, t_list *map)
 {
+	static size_t	err = 0;
+
 	if (map != NULL)
 	{
-		print_map(lemin, map->next, err);
+		print_map(lemin, map->next);
 		if ((lemin->error & WRITE_ERR) == FALSE)
 			print_line(lemin, (char *)map->content);
-		else if (*err == FALSE && (lemin->error & WRITE_ERR))
+		else if (err == FALSE && (lemin->error & WRITE_ERR))
 		{
-			(*err)++;
+			err++;
 			ft_putstr_fd("lemin: error: ", 2);
 			perror("write");
 		}
@@ -88,7 +92,6 @@ static void		print_map(t_lemin *lemin, t_list *map, size_t *err)
 int					main(int ac, char **av)
 {
 	t_lemin lemin;
-	size_t	err;
 
 	(void)ac;
 	ft_bzero(&lemin, sizeof(lemin));
@@ -96,18 +99,17 @@ int					main(int ac, char **av)
 		return (EXIT_FAILURE);
 	if (parser(&lemin) == FAILURE)
 	{
-		print_error(lemin.error);
+		print_error(lemin.option & V_OPT ? lemin.error | V_ERR : lemin.error);
 		exit_routine(&lemin);
 		return (EXIT_FAILURE);
 	}
 	if (get_best_way_set(&lemin) == FAILURE)
 	{
-		ft_putendl_fd("lem-in: error: No way is possible", 2);
+		ft_putendl_fd(lemin.option & V_OPT ? STR_ERR_NOWAY : "ERROR", 2);
 		exit_routine(&lemin);
 		return (EXIT_FAILURE);
 	}
-	err = 0;
-	print_map(&lemin, lemin.map, &err);
+	print_map(&lemin, lemin.map);
 	complete_result(&lemin);
 	if (lemin.option & COUNT_OPT)
 		ft_printf("Count : %zu\n", lemin.count);

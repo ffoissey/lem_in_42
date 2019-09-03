@@ -6,7 +6,7 @@
 /*   By: ffoissey <ffoisssey@student.42.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/26 09:45:28 by ffoissey          #+#    #+#             */
-/*   Updated: 2019/07/26 09:47:12 by ffoissey         ###   ########.fr       */
+/*   Updated: 2019/09/03 14:02:09 by ffoissey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,11 @@ static void		links_error(uint32_t error)
 
 void			print_error(uint32_t error)
 {
+	if ((error & V_ERR) == FALSE)
+	{
+		ft_putendl_fd("ERROR", 2);
+		return ;
+	}
 	ft_putstr_fd("lem-in: error: ", 2);
 	if (error & READ_ERR)
 		perror("read");

@@ -6,7 +6,7 @@
 /*   By: ffoissey <ffoisssey@student.42.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/26 10:11:40 by ffoissey          #+#    #+#             */
-/*   Updated: 2019/08/02 12:15:24 by ffoissey         ###   ########.fr       */
+/*   Updated: 2019/09/03 14:05:12 by ffoissey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,10 @@ void		free_links_list(t_list *lst)
 	free(lst);
 }
 
-void	free_room(void *content)
+void		free_room(void *content)
 {
 	t_room *room;
-	
+
 	room = (t_room *)content;
 	ft_strdel(&room->name);
 	free_links_list(room->links);
