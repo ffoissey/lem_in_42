@@ -6,7 +6,7 @@
 /*   By: ffoissey <ffoisssey@student.42.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/10 17:19:59 by ffoissey          #+#    #+#             */
-/*   Updated: 2019/08/02 11:44:43 by ffoissey         ###   ########.fr       */
+/*   Updated: 2019/09/03 14:03:28 by ffoissey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@
 # include "libft.h"
 # include <stdint.h>
 # include <limits.h>
+
+# define STR_ERR_NOWAY		"lem-in: error: No way is possible"
 
 /*
 ***** Comments and Commands
@@ -53,6 +55,7 @@
 # define ONLYCOM_OPT		0x04
 # define GRAPH_OPT			0x08
 # define WAYS_OPT			0x10
+# define V_OPT				0x20
 
 /*
 *****************
@@ -97,6 +100,12 @@
 # define LINKS_ERR			0x00040000
 # define PRE_PROCESS_ERR	0x00100000
 # define PROCESS_ERR		0x00200000
+
+/*
+**** Verbose
+*/
+
+# define V_ERR				0x01000000
 
 /*
 **** Critical errors

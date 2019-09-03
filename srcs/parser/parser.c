@@ -6,7 +6,7 @@
 /*   By: ffoissey <ffoisssey@student.42.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/12 11:08:43 by ffoissey          #+#    #+#             */
-/*   Updated: 2019/08/02 12:09:49 by ffoissey         ###   ########.fr       */
+/*   Updated: 2019/09/03 14:05:40 by ffoissey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static int8_t	post_parsing(t_lemin *lemin)
 				&& (lemin->error & LINKS_ERR)) ? SUCCESS : FAILURE);
 }
 
-int8_t		parser(t_lemin *lemin)
+int8_t			parser(t_lemin *lemin)
 {
 	static t_parsing	parsing[3] = {get_ants, get_rooms, get_links};
 	char				*line;
