@@ -6,7 +6,7 @@
 /*   By: ffoissey <ffoisssey@student.42.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/10 17:50:47 by ffoissey          #+#    #+#             */
-/*   Updated: 2019/09/03 14:05:57 by ffoissey         ###   ########.fr       */
+/*   Updated: 2019/09/04 11:23:27 by ffoissey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ static int8_t		parse_arg(t_lemin *lemin, char **arg)
 			ft_dprintf(2, "lem-in: %s: Invalid option\n", *arg);
 			ft_dprintf(2, "usage: ./lem-in [--option]\n");
 			ft_dprintf(2, "options: --nomap\n\t --onlycom\n\t");
-			ft_dprintf(2, " --count\n\t --ways\n\t --graph\n");
+			ft_dprintf(2, " --count\n\t --ways\n\t --graph\n\t --verbose\n");
 			return (FAILURE);
 		}
 		arg++;

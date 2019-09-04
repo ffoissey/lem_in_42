@@ -6,7 +6,7 @@
 /*   By: ffoissey <ffoisssey@student.42.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/26 10:26:31 by ffoissey          #+#    #+#             */
-/*   Updated: 2019/07/26 10:47:36 by ffoissey         ###   ########.fr       */
+/*   Updated: 2019/09/04 12:46:02 by ffoissey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,7 @@ static int8_t	room_acquisition(t_lemin *lemin, char *line, t_room *room)
 {
 	ft_bzero(room, sizeof(t_room));
 	room->mark = UNMARK;
+	room->hit = 0;
 	room->name = get_room_name(lemin, line);
 	if (lemin->error)
 		return (FAILURE);

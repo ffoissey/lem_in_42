@@ -6,7 +6,7 @@
 /*   By: ffoissey <ffoisssey@student.42.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/10 17:19:59 by ffoissey          #+#    #+#             */
-/*   Updated: 2019/09/03 14:03:28 by ffoissey         ###   ########.fr       */
+/*   Updated: 2019/09/04 12:01:54 by ffoissey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,9 @@
 # include <limits.h>
 
 # define STR_ERR_NOWAY		"lem-in: error: No way is possible"
+
+# define INCREMENT			1
+# define DECREMENT			-1
 
 /*
 ***** Comments and Commands
@@ -150,6 +153,7 @@ typedef struct		s_room
 	size_t			nb_links;
 	size_t			ants;
 	size_t			score;
+	int64_t			hit;
 	t_coord			coord;
 	uint8_t			mark;
 }					t_room;
