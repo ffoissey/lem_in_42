@@ -12,7 +12,7 @@ Voici une description non-exhaustive de notre algorithme:
  1. Si une salle ne donne sur aucune nouvelle salle, toute sa lignée est marquée comme morte et ne sera plus exploré.
  2. Tout les salles ayant un score supérieur au score le plus haut des salles mitoyennes à START ou END seront également marquées comme morte.
  3. --> Ces deux dernières opérations ont pour but de minimiser le nombres de chemins possibles.
-* Chaque salle va emettre un 'traceur' vers START et END de sorte que chaque salle est associé qu chemin le plus court passant par celle-ci.
+* Chaque salle va emettre un 'traceur' vers START et END de sorte que chaque salle est associé au chemin le plus court passant par celle-ci.
 * Les doublons sont éliminés pour n'avoir que des chemins uniques.
 * Les chemins obtenus sont triés de celui qui contient le moins de salles à celui qui en contient le plus.
 * Chaque chemin est associés à une liste de chemin qui ne croise pas celui-ci et ne se croisent pas entre eux.
