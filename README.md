@@ -2,14 +2,14 @@
 *Ce projet permet d'appréhender les algorithmes de parcours de graphe et de gestion de flots.*
 
 Le but du projet est de trouver l'ensemble de chemins le plus rapide pour déplacer n fourmis de la salle definie par '##start'
-à la salle définie par '##end'. Une seule fourmi peut etre présente par salle et par tour.
+à la salle définie par '##end'. Une seule fourmi peut être présente par salle et par tour.
 
-Nous avons voulu partir de zéro pour développer notre propre algorithme et ainsi pouvoir être confronté aux problèmes
+Nous avons voulu partir de zéro pour développer notre propre algorithme et ainsi pouvoir être confrontés aux problèmes
 amenés par ce projet sans avoir une solution toute faite, puis seulement ensuite,
-apprendre comment les algorithmes déjà existant resolvent ceux-ci.
+apprendre comment les algorithmes déjà existant résolvent ceux-ci.
 
 Voici une description non-exhaustive de notre algorithme:
-* Pour chaque salle: Faire la somme de la distance à la salle START et celle de la salle END.
+* Pour chaque salle: Faire la somme de la distance à la salle START et celle à la salle END.
  1. Si aucune salle ne succède à la salle courante, toute sa lignée est marquée comme morte et ne sera plus explorée.
  2. Tout les salles ayant un score supérieur au score le plus haut des salles mitoyennes à START ou END seront également marquées comme morte.
  
