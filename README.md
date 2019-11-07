@@ -10,10 +10,10 @@ apprendre comment les algorithmes déjà existant résolvent ceux-ci.
 
 Voici une description non-exhaustive de notre algorithme:
 * Pour chaque salle: Faire la somme de la distance à la salle START et celle à la salle END.
-   1. Si aucune salle ne succède à la salle courante, toute sa lignée est marquée comme morte et ne sera plus explorée.
-   2. Tout les salles ayant un score supérieur au score le plus haut des salles mitoyennes à START ou END seront également marquées comme morte.
+ 1. Si aucune salle ne succède à la salle courante, toute sa lignée est marquée comme morte et ne sera plus explorée.
+ 2. Tout les salles ayant un score supérieur au score le plus haut des salles mitoyennes à START ou END seront également marquées comme morte.
  
-       --> Ces deux dernières opérations ont pour but de minimiser le nombre de chemins possibles.
+     --> Ces deux dernières opérations ont pour but de minimiser le nombre de chemins possibles.
 * Chaque salle va émettre un 'traceur' vers START et END de sorte que chaque salle soit associé au chemin le plus court passant par celle-ci.
 * Les doublons sont éliminés pour n'avoir que des chemins uniques.
 * Les chemins obtenus sont triés de celui qui contient le moins de salles à celui qui en contient le plus.
